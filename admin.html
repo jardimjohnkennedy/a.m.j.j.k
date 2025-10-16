@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Kendence F.C.</title>
+    <title>A.M.J.J.K</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { background-color: #1a202c; color: white; }
@@ -48,7 +48,7 @@
 </head>
 <body class="p-8 font-sans">
 
-    <h1 class="text-4xl font-bold text-center mb-8">Painel de Administração - Kendence F.C.</h1>
+    <h1 class="text-4xl font-bold text-center mb-8">Painel de Administração - A.M.J.J.K</h1>
 
     <div class="backup-section text-center">
         <h2 class="text-2xl font-bold mb-4">Backup e Restauração</h2>
@@ -63,25 +63,25 @@
     <div class="mb-8">
         <label for="section-select" class="block mb-2 text-lg font-medium">Selecione a área para gerenciar:</label>
         <select id="section-select" class="form-input w-full p-3" onchange="showForm(this.value)">
-            <option value="upcomingGames">Próximos Jogos</option>
-            <option value="recentResults">Resultados Recentes</option>
+            <option value="upcomingGames">Próximas reunioes</option>
+            <option value="recentResults">Ultimas Reuniões</option>
             <option value="news">Notícias</option>
-            <option value="players">Jogadores</option>
-            <option value="sponsors">Patrocinadores</option>
+            <option value="players"> Representantes </option>
+            <option value="sponsors"> Apoiadores</option>
         </select>
     </div>
 
     <div id="forms-container">
         <div id="form-upcomingGames" class="form-section">
-            <h2 class="text-2xl font-bold mb-4">Gerenciar Próximos Jogos</h2>
+            <h2 class="text-2xl font-bold mb-4">Gerenciar Próximas Reuniões</h2>
             <form id="upcomingGames-form" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input type="hidden" id="upcomingGames-id">
                 <div>
-                    <label for="upcomingGames-date-input" class="block text-sm font-medium mb-1">Data do Jogo</label>
+                    <label for="upcomingGames-date-input" class="block text-sm font-medium mb-1">Data da Reunião</label>
                     <input type="date" id="upcomingGames-date-input" class="form-input p-2 w-full" required>
                 </div>
                 <div>
-                    <label for="upcomingGames-time-input" class="block text-sm font-medium mb-1">Hora do Jogo</label>
+                    <label for="upcomingGames-time-input" class="block text-sm font-medium mb-1">Hora da reunião</label>
                     <input type="time" id="upcomingGames-time-input" class="form-input p-2 w-full" required>
                 </div>
                 <input type="text" id="upcomingGames-teams" placeholder="Times (ex: Kendence vs. Time B)" class="form-input p-2" required>
@@ -94,15 +94,15 @@
             </form>
         </div>
         <div id="form-recentResults" class="form-section hidden">
-            <h2 class="text-2xl font-bold mb-4">Gerenciar Resultados Recentes</h2>
+            <h2 class="text-2xl font-bold mb-4">Gerenciar Reuniões Recentes</h2>
             <form id="recentResults-form" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input type="hidden" id="recentResults-id">
                  <div>
-                    <label for="recentResults-date-input" class="block text-sm font-medium mb-1">Data do Jogo</label>
+                    <label for="recentResults-date-input" class="block text-sm font-medium mb-1">Data da Reunião</label>
                     <input type="date" id="recentResults-date-input" class="form-input p-2 w-full" required>
                 </div>
                 <div>
-                    <label for="recentResults-time-input" class="block text-sm font-medium mb-1">Hora do Jogo</label>
+                    <label for="recentResults-time-input" class="block text-sm font-medium mb-1">Hora da reunião</label>
                     <input type="time" id="recentResults-time-input" class="form-input p-2 w-full" required>
                 </div>
                 <input type="text" id="recentResults-match" placeholder="Resultado (ex: Kendence 3 x 2 Time B)" class="form-input p-2" required>
@@ -137,21 +137,21 @@
         </div>
 
         <div id="form-players" class="form-section hidden">
-            <h2 class="text-2xl font-bold mb-4">Gerenciar Jogadores e Comissão</h2>
+            <h2 class="text-2xl font-bold mb-4">Gerenciar Representantes</h2>
             <form id="players-form" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input type="hidden" id="players-id">
-                <input type="text" id="players-name" placeholder="Nome do Jogador" class="form-input p-2" required>
+                <input type="text" id="players-name" placeholder="Nome do representante" class="form-input p-2" required>
                  <select id="players-role" class="form-input p-2" required>
                     <option value="">Selecione a Função</option>
-                    <option value="Comissão Técnica">Técnico / Comissão</option>
-                    <option value="Goleiros">Goleiro</option>
-                    <option value="Zagueiros e Volantes">Zagueiro e Volante</option>
-                    <option value="Laterais">Lateral</option>
-                    <option value="Meios">Meio-Campo</option>
-                    <option value="Atacantes">Atacante</option>
+                    <option value="Presidente">Presidente</option>
+                    <option value="Vice-Presidente">Vice-Presidente</option>
+                    <option value="1º Secretario">1º Secretario</option>
+                    <option value="2º Secretario">2º Secretario</option>
+                    <option value="Tesoureiro">Tesoureiro</option>
+                    <option value="Fiscais">Fiscais</option>
                 </select>
                 <div class="col-span-1 md:col-span-2">
-                    <label for="players-image-final" class="block text-sm font-medium mb-1">URL da Foto do Jogador</label>
+                    <label for="players-image-final" class="block text-sm font-medium mb-1">URL da Foto do Representante</label>
                     <div class="url-input-container">
                         <span class="url-base" id="players-baseUrl">https://lh3.googleusercontent.com/d/1</span>
                         <input type="text" id="players-image-final" class="url-final-input" placeholder="cole o final da URL aqui" required>
@@ -166,7 +166,7 @@
         </div>
         
         <div id="form-sponsors" class="form-section hidden">
-            <h2 class="text-2xl font-bold mb-4">Gerenciar Patrocinadores</h2>
+            <h2 class="text-2xl font-bold mb-4">Gerenciar Colaboradores</h2>
             <form id="sponsors-form" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input type="hidden" id="sponsors-id">
                 <input type="text" id="sponsors-name" placeholder="Nome do Patrocinador" class="form-input p-2" required>
@@ -364,3 +364,4 @@
 </body>
 
 </html>
+
