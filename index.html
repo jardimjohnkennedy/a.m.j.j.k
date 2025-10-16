@@ -8,16 +8,16 @@
     <style>
         body {
             font-family: 'Inter', sans-serif; margin: 0; padding: 0; background-color: black;
-            /* CORREÇÃO: URL da imagem de fundo */
-            background-image: url('https://github.com/jardimjohnkennedy/amjjk/blob/main/logo.png');
+            /* CORREÇÃO: URL da imagem de fundo para o formato raw */
+            background-image: url('https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/main/background%20.png');
             background-size: cover; background-repeat: no-repeat; background-position: center; background-attachment: fixed; overflow-y: auto;
         }
         .splash-screen {
             display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;
             text-align: center; color: white; transition: opacity 1s ease-in-out; position: fixed;
             top: 0; left: 0; width: 100%; z-index: 100;
-            /* CORREÇÃO: URL da imagem de fundo */
-            background-image: url('https://github.com/jardimjohnkennedy/amjjk/blob/main/baner_patrocinio.png');
+            /* CORREÇÃO: URL da imagem de fundo para o formato raw */
+            background-image: url('https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/main/baner_patrocinio.png');
             background-size: cover; background-position: center;
         }
         .splash-screen.hidden { opacity: 0; pointer-events: none; }
@@ -45,27 +45,27 @@
 <body>
     <div class="whatsapp-widget">
         <a href="https://wa.me/554399597429" target="_blank" class="whatsapp-btn">
-            <img src="https://github.com/jardimjohnkennedy/amjjk/blob/main/logo_whats.png" alt="WhatsApp Icon" class="w-8 h-8 object-contain">
+            <img src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/main/logo_whats.png" alt="WhatsApp Icon" class="w-8 h-8 object-contain">
         </a>
         <span class="whatsapp-text">Contato</span>
     </div>
     <div class="android-widget">
         <a href="https://drive.google.com/file/d/1qBB8JcnsnT99cPWLvD-GVgq8BrycJBP_/view" target="_blank" class="android-btn">
-            <img src="https://github.com/jardimjohnkennedy/amjjk/blob/main/logo_app.png" alt="App Icon" class="w-11 h-11 object-contain">
+            <img src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/main/logo_app.png" alt="App Icon" class="w-11 h-11 object-contain">
         </a>
         <span class="android-text">APP Android</span>
     </div>
 
     <div id="splashScreen" class="splash-screen">
         <div class="image-container">
-            <img id="logo1" src="https://github.com/jardimjohnkennedy/amjjk/blob/main/brasao_1.png" alt="Logo do Clube 1" class="blinking-logo">
-            <img id="logo2" src="https://github.com/jardimjohnkennedy/amjjk/blob/main/brasao_2.png" alt="Logo do Clube 2" class="blinking-logo hidden">
+            <img id="logo1" src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/main/brasao_1.png" alt="Logo do Clube 1" class="blinking-logo">
+            <img id="logo2" src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/main/brasao_2.png" alt="Logo do Clube 2" class="blinking-logo hidden">
         </div>
     </div>
 
     <div id="mainContent" class="main-content min-h-screen flex-grow mx-auto px-2 overflow-y-auto">
         <header class="w-full text-white text-center">
-            <img src="https://github.com/jardimjohnkennedy/amjjk/blob/main/logo.png" alt="Brasão do Kendence F.C." class="w-full object-cover mt-0">
+            <img src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/main/logo.png" alt="Brasão do Kendence F.C." class="w-full object-cover mt-0">
         </header>
 
         <main class="w-full p-6 mt-auto" id="mainSection">
@@ -108,11 +108,10 @@
         </footer>
     </div>
 
-<script type="module">
+    <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-analytics.js";
-        // --- ADICIONE ESTA LINHA ---
         import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
 
         // Your web app's Firebase configuration
@@ -129,15 +128,12 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
-        const database = getDatabase(app); // Agora esta linha funcionará
-        
-        // O resto do seu código continua aqui...
+        const database = getDatabase(app);
     
         let currentNewsIndex = 0;
         let newsData = [];
         let newsInterval;
 
-        // --- FUNÇÃO PARA FORMATAR DATA E HORA ---
         function formatDateTime(isoString) {
             if (!isoString) return '';
             const date = new Date(isoString);
@@ -148,9 +144,8 @@
             return `${day}/${month} - ${hours}:${minutes}`;
         }
 
-        // --- CONTEÚDO ESTÁTICO E TEMPLATES ---
         const galleryFolders = [ { name: 'WALLPAPERS', driveLink: 'https://drive.google.com/drive/folders/1ujHIcc87gguhfM5-aZTzCI9MoJ-u4a-p?usp=drive_link' }, { name: 'FOTOS E VIDEOS', driveLink: 'https://drive.google.com/drive/folders/1MPieySZltQ69euP81L9o2V08wlC_4JQu?usp=drive_link' }, { name: 'BRASÃO DO TIME', driveLink: 'https://drive.google.com/drive/folders/1BNs1TjGhXATk8STdXLheeV3UIsTzaAkE?usp=drive_link' }, { name: 'CAMISETAS', driveLink: 'https://drive.google.com/drive/folders/1Z3PidCFqvr9FggAzUEdJkNqgLWtrd-eD?usp=drive_link' }, { name: 'FIGURINHAS', driveLink: 'https://drive.google.com/drive/folders/1BTOeKlLyKpi8or4u2p5a3kxVI-KIQ5AG?usp=drive_link' } ];
-        const HISTORY_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">História do Clube</h2><img src="https://raw.githubusercontent.com/jardimjohnkennedy/a.m.j.j.k/main/historia.jpg" alt="História do Clube" class="w-full h-auto rounded-lg mb-4"><div class="space-y-4 overflow-y-auto w-full h-full"><p class="text-gray-200">Fundado em 1987...Hoje, o Kendence segue representando o bairro com orgulho.</p></div></div></div>`;
+        const HISTORY_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">História do Clube</h2><img src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/main/historia.jpg" alt="História do Clube" class="w-full h-auto rounded-lg mb-4"><div class="space-y-4 overflow-y-auto w-full h-full"><p class="text-gray-200">Fundado em 1987...Hoje, o Kendence segue representando o bairro com orgulho.</p></div></div></div>`;
         const SOCIAL_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Redes Sociais</h2><div class="space-y-4 w-full"><a href="https://www.youtube.com/channel/UCVG6kWDq2JIdurnN7LIgmPQ" target="_blank" class="block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg text-center">YouTube</a><a href="https://www.instagram.com/kendence2015/?__pwa=1#" target="_blank" class="block bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-4 rounded-lg text-center">Instagram</a><button onclick="showSection('user-login')" class="block w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg text-center">Usuário (Acesso Restrito)</button></div></div></div>`;
         const GALLERY_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Galeria</h2><p class="text-gray-200 text-center mb-4">Selecione uma pasta para ver as mídias.</p><div class="space-y-4 overflow-y-auto w-full h-full">${galleryFolders.map(f => `<a href="${f.driveLink}" target="_blank" class="block w-full bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-lg text-center"><h3 class="font-bold">${f.name}</h3></a>`).join('')}</div></div></div>`;
         const LOGIN_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Acesso Restrito</h2><form onsubmit="handleLogin(event)" class="space-y-4 w-full"><input type="text" id="username" placeholder="Login" class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none"><input type="password" id="password" placeholder="Senha" class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none"><button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg">Entrar</button></form><div id="loginMessage" class="mt-4 text-center"></div></div></div>`;
@@ -159,7 +154,6 @@
         async function getPlayersContent() {
             const snapshot = await get(ref(database, 'players'));
             if (!snapshot.exists()) return '<p>Nenhum representante encontrado.</p>';
-            // ESTAS SÃO AS FUNÇÕES QUE O CÓDIGO PROCURA EXIBIR
             const roles = ['Comissão Técnica', 'Goleiros', 'Zagueiros e Volantes', 'Laterais', 'Meios', 'Atacantes'];
             let contentHTML = roles.map(role => {
                 const playersInRole = Object.values(snapshot.val()).filter(p => p.role === role);
@@ -176,7 +170,6 @@
             return `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Patrocinadores</h2>${contentHTML}</div></div>`;
         }
         
-        // --- FUNÇÕES GLOBAIS DE NAVEGAÇÃO (Expostas para o HTML) ---
         window.showSection = async (section) => {
             const sectionsContainer = document.getElementById('sectionsContainer');
             document.getElementById('navButtons').classList.add('hidden');
@@ -184,7 +177,6 @@
             sectionsContainer.classList.remove('hidden');
             document.getElementById('newsSection').classList.add('hidden');
             document.getElementById('fullNewsSection').classList.add('hidden');
-
             let contentHTML = '';
             switch(section) {
                 case 'players': contentHTML = await getPlayersContent(); break;
@@ -220,8 +212,8 @@
         window.handleLogin = (event) => {
             event.preventDefault();
             const users = {
-                "AYOSHI": { p: "1985", l: "./admin.html" }, // CORREÇÃO: Link para o arquivo local
-                "MARCELO": { p: "marcelo123", l: "./admin.html" }, // CORREÇÃO: Link para o arquivo local
+                "AYOSHI": { p: "1985", l: "./admin.html" },
+                "MARCELO": { p: "marcelo123", l: "./admin.html" },
                 "andersomyoshi": { p: "#Alfmoto1", l: "https://drive.google.com/drive/folders/1OhaT_CUG3-C_mqvfgiKn6t3eOEI9KxUY?usp=sharing" }
             };
             const u = document.getElementById('username').value.toUpperCase();
@@ -235,7 +227,6 @@
             }
         }
 
-        // --- FUNÇÕES DE RENDERIZAÇÃO ---
         function renderNews(containerId, newsArray) {
             document.getElementById(containerId).innerHTML = newsArray.map(news => `<div class="bg-gray-800 p-4 rounded-lg shadow-md relative"><span class="absolute top-2 right-2 text-xs text-gray-400">${news.date.split('-').reverse().join('/')}</span><h3 class="text-lg font-bold mb-2">${news.title}</h3><img src="${news.image}" alt="Notícia" class="w-full h-auto rounded-lg mb-2"><p class="text-gray-300">${news.text}</p></div>`).join('');
         }
@@ -250,7 +241,6 @@
             currentNewsIndex = (currentNewsIndex + 1) % newsToCycle.length;
         }
         
-        // --- CARGA INICIAL DOS DADOS ---
         async function loadInitialData() {
             try {
                 const [newsSnap, gamesSnap, resultsSnap] = await Promise.all([ get(ref(database, 'news')), get(ref(database, 'upcomingGames')), get(ref(database, 'recentResults')) ]);
@@ -299,13 +289,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
