@@ -192,17 +192,28 @@
     <div id="data-display" class="space-y-2">Carregando dados...</div>
     
     <script type="module">
+        // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-        const firebaseConfig = {
-    apiKey: "AIzaSyD1D5gRg9bkkeyVcJeizFPb24fnASueVvo",
-    authDomain: "amjjk-d8656.firebaseapp.com",
-    projectId: "amjjk-d8656",
-    storageBucket: "amjjk-d8656.firebasestorage.app",
-    messagingSenderId: "202877045569",
-    appId: "1:202877045569:web:3b4f713d291ebc0185efc0"
-     };
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-analytics.js";
+        import { getDatabase, ref, onValue, push, set, remove, get } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
 
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyD1D5gRg9bkkeyVcJeizFPb24fnASueVvo",
+            authDomain: "amjjk-d8656.firebaseapp.com",
+            projectId: "amjjk-d8656",
+            storageBucket: "amjjk-d8656.firebasestorage.app",
+            messagingSenderId: "202877045569",
+            appId: "1:202877045569:web:3b4f713d291ebc0185efc0",
+            measurementId: "G-HCHPVET393"
+        };
+
+        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
         const database = getDatabase(app);
 
         let currentSection = 'upcomingGames';
@@ -364,4 +375,3 @@
 </body>
 
 </html>
-
