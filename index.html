@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A.M.J.J.K</title>
+    <title>A.M.J.J.K - Associação de Moradores do Jardim John Kennedy</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif; margin: 0; padding: 0; background-color: black;
-            background-image: url('https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/background%20.png');
+            background-image: url('https://github.com/jardimjohnkennedy/kendence/blob/main/background%20.png');
             background-size: cover; background-repeat: no-repeat; background-position: center; background-attachment: fixed; overflow-y: auto;
         }
         .splash-screen {
             display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;
             text-align: center; color: white; transition: opacity 1s ease-in-out; position: fixed;
             top: 0; left: 0; width: 100%; z-index: 100;
-            background-image: url('https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/baner_patrocinio.png');
+            background-image: url('https://github.com/jardimjohnkennedy/kendence/blob/main/baner_patrocinio.png');
             background-size: cover; background-position: center;
         }
         .splash-screen.hidden { opacity: 0; pointer-events: none; }
@@ -43,27 +43,27 @@
 <body>
     <div class="whatsapp-widget">
         <a href="https://wa.me/554399597429" target="_blank" class="whatsapp-btn">
-            <img src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/logo_whats.png" alt="WhatsApp Icon" class="w-8 h-8 object-contain">
+            <img src="https://github.com/jardimjohnkennedy/kendence/blob/main/logo_whats.png" alt="WhatsApp Icon" class="w-8 h-8 object-contain">
         </a>
         <span class="whatsapp-text">Contato</span>
     </div>
     <div class="android-widget">
         <a href="https://drive.google.com/file/d/1qBB8JcnsnT99cPWLvD-GVgq8BrycJBP_/view" target="_blank" class="android-btn">
-            <img src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/logo_app.png" alt="App Icon" class="w-12 h-12 object-contain">
+            <img src="https://github.com/jardimjohnkennedy/kendence/blob/main/logo_app.png" alt="App Icon" class="w-11 h-11 object-contain">
         </a>
         <span class="android-text">APP Android</span>
     </div>
 
     <div id="splashScreen" class="splash-screen">
         <div class="image-container">
-            <img id="logo1" src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/brasao_1.png" alt="Logo do Clube 1" class="blinking-logo">
-            <img id="logo2" src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/brasao_2.png" alt="Logo do Clube 2" class="blinking-logo hidden">
+            <img id="logo1" src="https://github.com/jardimjohnkennedy/kendence/blob/main/brasao_1.png" alt="Logo 1" class="blinking-logo">
+            <img id="logo2" src="https://github.com/jardimjohnkennedy/kendence/blob/main/brasao_2.png" alt="Logo 2" class="blinking-logo hidden">
         </div>
     </div>
 
     <div id="mainContent" class="main-content min-h-screen flex-grow mx-auto px-2 overflow-y-auto">
         <header class="w-full text-white text-center">
-            <img src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/logo.png" alt="Brasão do Kendence F.C." class="w-full object-cover mt-0">
+            <img src="https://github.com/jardimjohnkennedy/kendence/blob/main/logo.png" alt="Brasão da A.M.J.J.K" class="w-full object-cover mt-0">
         </header>
 
         <main class="w-full p-6 mt-auto" id="mainSection">
@@ -75,21 +75,17 @@
             
             <div id="navButtons" class="flex flex-col items-end space-y-4 w-full mt-5 hidden">
                 <button onclick="showSection('fullNews')" class="btn-base bg-transparent hover:bg-gray-800 text-white font-bold">NOTICIAS</button>
-                <button onclick="showSection('players')" class="btn-base bg-transparent hover:bg-gray-800 text-white font-bold">DIRETORIA</button>
+                <button onclick="showSection('board')" class="btn-base bg-transparent hover:bg-gray-800 text-white font-bold">DIRETORIA</button>
                 <button onclick="showSection('history')" class="btn-base bg-transparent hover:bg-gray-800 text-white font-bold">HISTÓRIA</button>
                 <button onclick="showSection('social')" class="btn-base bg-transparent hover:bg-gray-800 text-white font-bold">REDES SOCIAIS</button>
-                <button onclick="showSection('sponsorship')" class="btn-base bg-transparent hover:bg-gray-800 text-white font-bold">UTILIDADE</button>
-                <button onclick="showSection('gallery')" class="btn-base bg-transparent hover:bg-gray-800 text-white font-bold">GALERIA</button>
+                <button onclick="showSection('utilities')" class="btn-base bg-transparent hover:bg-gray-800 text-white font-bold">UTILIDADES</button>
+                <button onclick="showSection('archive')" class="btn-base bg-transparent hover:bg-gray-800 text-white font-bold">ACERVO</button>
             </div>
             
-            <div id="sectionsContainer" class="mt-8 p-4 rounded-lg shadow-inner hidden section-container overflow-y-auto w-full h-full"></div>
+            <div id="sectionsContainer" class="mt-8 p-4 rounded-lg shadow-inner section-container overflow-y-auto w-full h-full hidden"></div>
             
             <div id="newsSection" class="mt-8 p-4 rounded-lg shadow-inner section-container overflow-y-auto w-full h-full">
                 <div class="space-y-6 w-full" id="latestNews"></div>
-                <h2 class="text-2xl font-bold mt-8 mb-4 text-center">AGENDA</h2>
-                <div id="upcomingGames" class="flex overflow-x-auto space-x-4 pb-4"></div>
-                <h2 class="text-2xl font-bold mt-8 mb-4 text-center">EVENTOS</h2>
-                <div id="recentResults" class="flex overflow-x-auto space-x-4 pb-4"></div>
             </div>
             
             <div id="fullNewsSection" class="mt-8 p-4 rounded-lg shadow-inner section-container overflow-y-auto w-full h-full hidden">
@@ -100,94 +96,60 @@
         
         <footer class="w-full text-white p-6 text-center mt-auto">
             <div class="space-y-2 text-sm">
-                <p><strong> Para a denúncia , reclamação ou sugestão, entre em contato pelo nosso WhatsApp!</strong> </p>
+                <p><strong>Para informação, reclamação ou denúncia, entrar em contato no nosso WhatsApp.</strong> </p>
                 <p><strong>By:</strong> A.Yoshi</p>
             </div>
         </footer>
     </div>
 
     <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-analytics.js";
-        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-        // Your web app's Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyD1D5gRg9bkkeyVcJeizFPb24fnASueVvo",
             authDomain: "amjjk-d8656.firebaseapp.com",
             projectId: "amjjk-d8656",
-            storageBucket: "amjjk-d8656.firebasestorage.app",
+            storageBucket: "amjjk-d8656.appspot.com",
             messagingSenderId: "202877045569",
             appId: "1:202877045569:web:3b4f713d291ebc0185efc0",
             measurementId: "G-HCHPVET393"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
         const database = getDatabase(app);
-    
+        
         let currentNewsIndex = 0;
         let newsData = [];
         let newsInterval;
 
-        function formatDateTime(isoString) {
-            if (!isoString) return '';
-            const date = new Date(isoString);
-            const day = String(date.getDate()).padStart(2, '0');
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const hours = String(date.getHours()).padStart(2, '0');
-            const minutes = String(date.getMinutes()).padStart(2, '0');
-            return `${day}/${month} - ${hours}:${minutes}`;
-        }
-
         // --- CONTEÚDO ESTÁTICO E TEMPLATES ---
-        const galleryFolders = [ { name: 'ARQUIVO1', driveLink: 'https://drive' }, { name: 'ARQUIVO2', driveLink: 'https://drive' }, { name: 'ARQUIVO 3', driveLink: 'https://drive' }, { name: 'ARQUICO3', driveLink: 'https://drive' } ];
-        const HISTORY_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">História do Bairro</h2><img src="https://www.ibipora.pr.gov.br/uploads/noticia/c2fbc36fa981312dd851d4c9f696ef28.jpg" alt="História do Bairro" class="w-full h-auto rounded-lg mb-4"><div class="space-y-4 overflow-y-auto w-full h-full"><p class="text-gray-200"><p>O Jardim John Kennedy é reconhecido como um dos bairros mais antigos e tradicionais do município de Ibiporã, no Paraná, documentos históricos indicam que a área já era habitada e recebia melhorias de infraestrutura na década de 1970, consolidando-se como uma comunidade importante da cidade.<p>
-
-<p>O Início da Comunidade<p>
-<p>Registros históricos apontam que em novembro de 1979, a então "Vila Kennedy" recebeu a inauguração de um poço artesiano para atender às necessidades dos moradores. Essa informação, presente no acervo histórico do município, sugere que o bairro já estava estabelecido e em crescimento naquela época, sendo objeto de políticas públicas para a melhoria da qualidade de vida de sua população. Ao longo dos anos, o bairro continuou a se desenvolver, com a Prefeitura realizando obras de infraestrutura como a instalação de galerias pluviais e a construção de pontes para aprimorar as condições locais.<p>
-
-<p>A Associação de Moradores<p>
-<p>A data precisa de fundação da Associação de Moradores do Jardim John Kennedy e o nome de seu primeiro presidente não foram localizados em pesquisas em arquivos digitais, jornais online ou no site da prefeitura. Informações tão específicas sobre a liderança inicial de associações de bairro frequentemente não estão digitalizadas e permanecem em arquivos físicos.<p>
-
-<p>No entanto, é possível traçar um histórico mais recente da liderança da associação, mostrando sua atuação contínua na defesa dos interesses da comunidade:<p>
-
-<p>Marlene Rosa de Almeida Costa: Foi eleita presidente da associação em uma eleição por aclamação realizada em 30 de maio de 2012. Sua posse ocorreu em 13 de junho do mesmo ano, na Escola Municipal Sebastião Luiz de Oliveira.<p>
-
-<p>Simone Pinto: É mencionada como presidente da associação em uma reportagem de dezembro de 2019, durante a entrega de obras de revitalização do bairro pela prefeitura.<p>
-
-<p>Um documento oficial de 2021 também cita Marlene Rosa de Almeida como representante titular e Simone Pinto como suplente da associação em um conselho municipal, indicando a continuidade do trabalho dessas lideranças comunitárias ao longo dos anos.<p>
-
-<p>Recentemente, o bairro continua a ser foco de investimentos, com licitações abertas em outubro de 2025 para a construção de novas áreas de lazer, como quadra poliesportiva, playground e pista de caminhada, reforçando sua importância para o município.<p>
-
-</p></div></div></div>`;
-        const SOCIAL_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Redes Sociais</h2><div class="space-y-4 w-full"><a href="https://www.youtube.com/channel/UCVG6kWDq2JIdurnN7LIgmPQ" target="_blank" class="block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg text-center">YouTube</a><a href="https://www.instagram.com/kendence2015/?__pwa=1#" target="_blank" class="block bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-4 rounded-lg text-center">Instagram</a><button onclick="showSection('user-login')" class="block w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg text-center">Usuário (Acesso Restrito)</button></div></div></div>`;
-        const GALLERY_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Galeria</h2><p class="text-gray-200 text-center mb-4">Selecione uma pasta para ver as mídias.</p><div class="space-y-4 overflow-y-auto w-full h-full">${galleryFolders.map(f => `<a href="${f.driveLink}" target="_blank" class="block w-full bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-lg text-center"><h3 class="font-bold">${f.name}</h3></a>`).join('')}</div></div></div>`;
+        const archiveFolders = [ { name: 'FOTOS E VIDEOS', driveLink: 'https://drive.google.com/drive/folders/1MPieySZltQ69euP81L9o2V08wlC_4JQu?usp=drive_link' }, { name: 'DOCUMENTOS', driveLink: 'https://drive.google.com/drive/folders/1BNs1TjGhXATk8STdXLheeV3UIsTzaAkE?usp=drive_link' }];
+        const HISTORY_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">História da Associação</h2><img src="https://lh3.googleusercontent.com/d/19tMWJUs5rl403bm4Qz7R3Vep8Lg14qYV" alt="História" class="w-full h-auto rounded-lg mb-4"><div class="space-y-4 overflow-y-auto w-full h-full"><p class="text-gray-200">História da associação...</p></div></div></div>`;
+        const SOCIAL_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Redes Sociais</h2><div class="space-y-4 w-full"><a href="#" target="_blank" class="block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg text-center">Facebook</a><a href="#" target="_blank" class="block bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-4 rounded-lg text-center">Instagram</a><button onclick="showSection('user-login')" class="block w-full bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg text-center">Acesso Restrito</button></div></div></div>`;
+        const ARCHIVE_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Acervo</h2><p class="text-gray-200 text-center mb-4">Selecione uma pasta para ver.</p><div class="space-y-4 overflow-y-auto w-full h-full">${archiveFolders.map(f => `<a href="${f.driveLink}" target="_blank" class="block w-full bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-lg text-center"><h3 class="font-bold">${f.name}</h3></a>`).join('')}</div></div></div>`;
         const LOGIN_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Acesso Restrito</h2><form onsubmit="handleLogin(event)" class="space-y-4 w-full"><input type="text" id="username" placeholder="Login" class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none"><input type="password" id="password" placeholder="Senha" class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none"><button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg">Entrar</button></form><div id="loginMessage" class="mt-4 text-center"></div></div></div>`;
         const FULL_NEWS_TEMPLATE = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Notícias Completas</h2><div class="space-y-6 w-full" id="fullNewsContent"></div></div></div>`;
         
-        async function getPlayersContent() {
-            const snapshot = await get(ref(database, 'players'));
-            if (!snapshot.exists()) return '<p>Nenhuma diretoria encontrada.</p>';
-            const roles = ['Pesidente', 'Vice-Pesidente', '1º Secretario', '2º Secretario', 'Tesoureiro', 'Fiscais'];
+        async function getBoardContent() {
+            const snapshot = await get(ref(database, 'board')); // Alterado de 'players' para 'board'
+            if (!snapshot.exists()) return '<p>Nenhum membro da diretoria encontrado.</p>';
+            const roles = ['Presidente', 'Vice-presidente', '1º Secretário', '2º Secretário', 'Tesoureiro', 'Fiscais'];
             let contentHTML = roles.map(role => {
-                const playersInRole = Object.values(snapshot.val()).filter(p => p.role === role);
-                if (playersInRole.length === 0) return '';
-                return `<h3 class="text-lg font-bold mt-4">${role}</h3>` + playersInRole.map(p => `<a href="${p.instagram}" target="_blank" class="flex items-center bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-lg"><img src="${p.image}" alt="${p.name}" class="w-11 h-11 rounded-full mr-2 object-cover">${p.name}</a>`).join('');
+                const membersInRole = Object.values(snapshot.val()).filter(p => p.role === role);
+                if (membersInRole.length === 0) return '';
+                return `<h3 class="text-lg font-bold mt-4">${role}</h3>` + membersInRole.map(p => `<div class="flex items-center bg-gray-200 text-gray-800 font-bold py-3 px-4 rounded-lg"><img src="${p.image}" alt="${p.name}" class="w-11 h-11 rounded-full mr-2 object-cover">${p.name}</div>`).join('');
             }).join('');
-            return `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Comissão e Jogadores</h2><div class="space-y-4 overflow-y-auto w-full h-full">${contentHTML}</div></div></div>`;
+            return `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Diretoria</h2><div class="space-y-4 overflow-y-auto w-full h-full">${contentHTML}</div></div></div>`;
         }
 
-        async function getSponsorshipContent() {
-            const snapshot = await get(ref(database, 'sponsors'));
-            if (!snapshot.exists()) return '<p>Nenhum patrocinador encontrado.</p>';
-            let contentHTML = Object.values(snapshot.val()).map(s => `<div class="mt-6"><img src="${s.image}" alt="${s.name}" class="w-32 h-32 rounded-lg mb-4 mx-auto"><div class="bg-gray-800 p-4 rounded-lg shadow-md w-full"><h3 class="text-lg font-bold mb-2">${s.name}</h3><p class="text-white text-sm"><strong>Endereço:</strong> ${s.address}</p><p class="text-white text-sm"><strong>Telefone:</strong> ${s.phone}</p><a href="${s.instagram}" target="_blank" class="block w-full mt-4 bg-red-700 hover:bg-red-900 text-white font-bold py-3 px-4 rounded-lg text-center">Instagram</a></div></div>`).join('');
-            return `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Patrocinadores</h2>${contentHTML}</div></div>`;
+        async function getUtilitiesContent() {
+            const snapshot = await get(ref(database, 'utilities')); // Alterado de 'sponsors' para 'utilities'
+            if (!snapshot.exists()) return '<p>Nenhuma utilidade encontrada.</p>';
+            let contentHTML = Object.values(snapshot.val()).map(s => `<div class="mt-6"><img src="${s.image}" alt="${s.name}" class="w-32 h-32 rounded-lg mb-4 mx-auto object-contain"><div class="bg-gray-800 p-4 rounded-lg shadow-md w-full"><h3 class="text-lg font-bold mb-2">${s.name}</h3><p class="text-white text-sm mb-2"><strong>Descrição:</strong> ${s.description}</p><p class="text-white text-sm"><strong>Endereço:</strong> ${s.address}</p><p class="text-white text-sm"><strong>Telefone:</strong> ${s.phone}</p><a href="${s.link}" target="_blank" class="block w-full mt-4 bg-blue-700 hover:bg-blue-900 text-white font-bold py-3 px-4 rounded-lg text-center">Acessar Link</a></div></div>`).join('');
+            return `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Utilidades</h2>${contentHTML}</div></div>`;
         }
         
-        // --- FUNÇÕES GLOBAIS DE NAVEGAÇÃO (Expostas para o HTML) ---
         window.showSection = async (section) => {
             const sectionsContainer = document.getElementById('sectionsContainer');
             document.getElementById('navButtons').classList.add('hidden');
@@ -198,11 +160,11 @@
 
             let contentHTML = '';
             switch(section) {
-                case 'players': contentHTML = await getPlayersContent(); break;
+                case 'board': contentHTML = await getBoardContent(); break;
                 case 'history': contentHTML = HISTORY_CONTENT; break;
                 case 'social': contentHTML = SOCIAL_CONTENT; break;
-                case 'sponsorship': contentHTML = await getSponsorshipContent(); break;
-                case 'gallery': contentHTML = GALLERY_CONTENT; break;
+                case 'utilities': contentHTML = await getUtilitiesContent(); break;
+                case 'archive': contentHTML = ARCHIVE_CONTENT; break;
                 case 'user-login': contentHTML = LOGIN_CONTENT; break;
                 case 'fullNews':
                     sectionsContainer.innerHTML = FULL_NEWS_TEMPLATE;
@@ -228,27 +190,21 @@
             document.getElementById('fullNews').innerHTML = `<div class="bg-gray-800 p-4 rounded-lg shadow-md relative"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><span class="absolute top-2 right-2 text-xs text-gray-400">${news.date.split('-').reverse().join('/')}</span><h3 class="text-xl font-bold mb-2 mt-10">${news.title}</h3><img src="${news.image}" alt="Notícia" class="w-full h-auto rounded-lg mb-2"><p class="text-gray-300 mt-4">${news.text}</p></div>`;
         }
         
-        // CORRIGIDO: Função de login agora está no escopo global (window)
         window.handleLogin = (event) => {
             event.preventDefault();
-            // Lembre-se de preencher os links corretos aqui
-            const users = {
-                "AYOSHI": { p: "1985", l: "https://jardimjohnkennedy.github.io/amjjk/admin" },
-                "Marcelo": { p: "mnarcelo123", l: "https://jardimjohnkennedy.github.io/amjjk/admin" },
-                "andersomyoshi": { p: "#Alfmoto1", l: "https://drive.google.com/drive/folders/1OhaT_CUG3-C_mqvfgiKn6t3eOEI9KxUY?usp=sharing" }
-            };
-            const u = document.getElementById('username').value.toUpperCase(); // Deixa o login insensível a maiúsculas/minúsculas
+            const users = { "ADMIN": { p: "1234", l: "admin.html" } };
+            const u = document.getElementById('username').value.toUpperCase();
             const p = document.getElementById('password').value;
             const m = document.getElementById('loginMessage');
             
             if (users[u] && users[u].p === p) {
-                m.innerHTML = `<p class="text-green-500 font-bold">Acesso liberado!</p><a href="${users[u].l}" target="_blank" class="block mt-4 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg">Acessar Conteúdo</a>`;
+                m.innerHTML = `<p class="text-green-500 font-bold">Acesso liberado!</p>`;
+                window.location.href = users[u].l;
             } else {
                 m.innerHTML = '<p class="text-red-500 font-bold">Login ou senha incorretos.</p>';
             }
         }
 
-        // --- FUNÇÕES DE RENDERIZAÇÃO ---
         function renderNews(containerId, newsArray) {
             document.getElementById(containerId).innerHTML = newsArray.map(news => `<div class="bg-gray-800 p-4 rounded-lg shadow-md relative"><span class="absolute top-2 right-2 text-xs text-gray-400">${news.date.split('-').reverse().join('/')}</span><h3 class="text-lg font-bold mb-2">${news.title}</h3><img src="${news.image}" alt="Notícia" class="w-full h-auto rounded-lg mb-2"><p class="text-gray-300">${news.text}</p></div>`).join('');
         }
@@ -263,32 +219,18 @@
             currentNewsIndex = (currentNewsIndex + 1) % newsToCycle.length;
         }
         
-        // --- CARGA INICIAL DOS DADOS ---
         async function loadInitialData() {
             try {
-                const [newsSnap, gamesSnap, resultsSnap] = await Promise.all([ get(ref(database, 'news')), get(ref(database, 'upcomingGames')), get(ref(database, 'recentResults')) ]);
-
+                const newsSnap = await get(ref(database, 'news'));
                 if (newsSnap.exists()) {
                     const newsResult = newsSnap.val();
                     newsData = Object.keys(newsResult).map(key => ({ id: key, ...newsResult[key] })).sort((a, b) => new Date(b.date) - new Date(a.date));
-                    const newsToCycle = newsData.slice(0, 2);
-                    if (newsToCycle.length > 0) {
-                        renderSingleNews(newsToCycle);
+                    if (newsData.length > 0) {
+                        renderSingleNews(newsData);
                         clearInterval(newsInterval);
-                        newsInterval = setInterval(() => renderSingleNews(newsToCycle), 5000);
+                        newsInterval = setInterval(() => renderSingleNews(newsData), 5000);
                     }
                 }
-
-                if (gamesSnap.exists()) {
-                    const games = Object.values(gamesSnap.val()).sort((a, b) => new Date(b.date) - new Date(a.date));
-                    document.getElementById('upcomingGames').innerHTML = games.map(game => `<div class="flex-none w-full sm:w-80 bg-gray-800 p-4 rounded-lg shadow-md"><p class="text-sm font-semibold">${formatDateTime(game.date)}</p><h3 class="text-lg font-bold mt-1 mb-2">${game.teams}</h3><p class="text-sm text-gray-400">${game.location}</p><a href="${game.mapLink}" target="_blank" class="block mt-3 bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-3 rounded-lg text-center text-sm">Ver Local</a></div>`).join('');
-                }
-
-                if (resultsSnap.exists()) {
-                    const results = Object.values(resultsSnap.val()).sort((a, b) => new Date(b.date) - new Date(a.date));
-                     document.getElementById('recentResults').innerHTML = results.map(result => `<div class="flex-none w-full sm:w-80 bg-gray-800 p-4 rounded-lg shadow-md"><p class="text-sm font-semibold">${formatDateTime(result.date)}</p><h3 class="text-xl font-bold mt-1 mb-2">${result.match}</h3><p class="text-sm text-gray-400">${result.location}</p><a href="${result.videoLink}" target="_blank" class="block mt-3 bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-3 rounded-lg text-center text-sm">Ver Melhores Momentos</a></div>`).join('');
-                }
-
             } catch (error) {
                 console.error("Erro ao carregar dados do Firebase:", error);
                 document.getElementById('latestNews').innerHTML = '<p class="text-center text-red-500">Falha ao carregar dados.</p>';
