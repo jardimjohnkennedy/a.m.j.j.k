@@ -104,7 +104,7 @@
                 <div>
                     <label for="news-image-final" class="block text-sm font-medium mb-1">URL da Imagem</label>
                     <div class="url-input-container">
-                        <span class="url-base"></span>
+                        <span class="url-base" id="news-baseUrl">https://lh3.googleusercontent.com/d/</span>
                         <input type="text" id="news-image-final" class="url-final-input" placeholder="cole o final da URL aqui">
                     </div>
                 </div>
@@ -197,12 +197,45 @@
             board:         { dbRef: 'board', formId: 'board-form' },
             utilities:     { dbRef: 'utilities', formId: 'utilities-form' }
         };
+
+        // --- CORREÇÃO APLICADA AQUI ---
+        // A função fetchData foi movida para o escopo global (anexada a 'window')
+        window.fetchData = () => {
+            const dataRef = ref(database, sections[currentSection].dbRef);
+            const display = document.getElementById('data-display');
+            display.innerHTML = 'Carregando...';
+
+            onValue(dataRef, (snapshot) => {
+                display.innerHTML = '';
+                const data = snapshot.val();
+                if (data) {
+                    let items = Object.entries(data);
+                    // Ordena por data, se o item tiver essa propriedade
+                    if (items.length > 0 && items[0][1].date) {
+                        items.sort(([, a], [, b]) => new Date(b.date) - new Date(a.date));
+                    }
+                    items.forEach(([key, item]) => {
+                        const title = item.title || item.teams || item.match || item.name;
+                        const itemDiv = document.createElement('div');
+                        itemDiv.className = 'bg-gray-700 p-3 rounded flex justify-between items-center';
+                        itemDiv.innerHTML = `<span>${title || 'Item sem título'}</span>
+                                           <div>
+                                               <button onclick="editItem('${key}')" class="btn btn-secondary py-1 px-2 text-sm">Editar</button>
+                                               <button onclick="deleteItem('${key}')" class="btn btn-danger py-1 px-2 text-sm">Excluir</button>
+                                           </div>`;
+                        display.appendChild(itemDiv);
+                    });
+                } else {
+                    display.innerHTML = '<p>Nenhum dado encontrado.</p>';
+                }
+            }, { onlyOnce: false }); // Garante que a lista atualize em tempo real
+        };
         
         window.showForm = (sectionName) => {
             currentSection = sectionName;
             document.querySelectorAll('.form-section').forEach(form => form.classList.add('hidden'));
             document.getElementById(`form-${sectionName}`).classList.remove('hidden');
-            fetchData();
+            window.fetchData(); // Chama a função global fetchData
             clearForm(currentSection);
         };
 
@@ -257,9 +290,9 @@
             }
         };
         
-        window.backupData = async () => { /* implementation in onload */ };
+        window.backupData = async () => { try { const snapshot = await get(ref(database)); if (!snapshot.exists()) { alert("Nenhum dado para fazer backup."); return; } const data = snapshot.val(); const jsonData = JSON.stringify(data, null, 2); const blob = new Blob([jsonData], { type: 'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; const date = new Date().toISOString().slice(0, 10); a.download = `backup-amjjk-${date}.json`; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); } catch (error) { alert("Erro ao fazer backup: " + error.message); } };
         window.triggerRestore = () => document.getElementById('restore-file-input').click();
-        window.restoreData = (event) => { /* implementation in onload */ };
+        window.restoreData = (event) => { const file = event.target.files[0]; if (!file) return; if (!confirm("ATENÇÃO: Isso irá substituir TODOS os dados atuais. Deseja continuar?")) { event.target.value = ''; return; } const reader = new FileReader(); reader.onload = (e) => { try { const jsonData = JSON.parse(e.target.result); set(ref(database), jsonData).then(() => alert("Backup restaurado com sucesso! A página será recarregada.")).then(() => location.reload()).catch(error => alert("Erro ao restaurar: " + error.message)); } catch (error) { alert("Erro: O arquivo selecionado não é um JSON válido."); } finally { event.target.value = ''; } }; reader.readAsText(file); };
         
         function handleFormSubmit(event) {
             event.preventDefault();
@@ -310,21 +343,12 @@
         }
         
         window.onload = () => {
-            let fetchData;
-            window.backupData = async () => { try { const snapshot = await get(ref(database)); if (!snapshot.exists()) { alert("Nenhum dado para fazer backup."); return; } const data = snapshot.val(); const jsonData = JSON.stringify(data, null, 2); const blob = new Blob([jsonData], { type: 'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; const date = new Date().toISOString().slice(0, 10); a.download = `backup-amjjk-${date}.json`; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); } catch (error) { alert("Erro ao fazer backup: " + error.message); } };
-            window.restoreData = (event) => { const file = event.target.files[0]; if (!file) return; if (!confirm("ATENÇÃO: Isso irá substituir TODOS os dados atuais. Deseja continuar?")) { event.target.value = ''; return; } const reader = new FileReader(); reader.onload = (e) => { try { const jsonData = JSON.parse(e.target.result); set(ref(database), jsonData).then(() => alert("Backup restaurado com sucesso! A página será recarregada.")).then(() => location.reload()).catch(error => alert("Erro ao restaurar: " + error.message)); } catch (error) { alert("Erro: O arquivo selecionado não é um JSON válido."); } finally { event.target.value = ''; } }; reader.readAsText(file); };
-            
-            fetchData = () => { const dataRef = ref(database, sections[currentSection].dbRef); const display = document.getElementById('data-display'); display.innerHTML = 'Carregando...'; onValue(dataRef, (snapshot) => { display.innerHTML = ''; const data = snapshot.val(); if (data) { let items = Object.entries(data); if (items.length > 0 && items[0][1].date) { items.sort(([, a], [, b]) => new Date(b.date) - new Date(a.date)); } items.forEach(([key, item]) => { const title = item.title || item.teams || item.match || item.name; const itemDiv = document.createElement('div'); itemDiv.className = 'bg-gray-700 p-3 rounded flex justify-between items-center'; itemDiv.innerHTML = `<span>${title}</span><div><button onclick="editItem('${key}')" class="btn btn-secondary py-1 px-2 text-sm">Editar</button><button onclick="deleteItem('${key}')" class="btn btn-danger py-1 px-2 text-sm">Excluir</button></div>`; display.appendChild(itemDiv); }); } else { display.innerHTML = '<p>Nenhum dado encontrado.</p>'; } }); };
-
             setupFormNames();
             Object.keys(sections).forEach(key => {
                 document.getElementById(sections[key].formId).addEventListener('submit', handleFormSubmit);
             });
-
             showForm(currentSection);
         };
     </script>
 </body>
 </html>
-
-
