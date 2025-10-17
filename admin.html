@@ -42,6 +42,8 @@
     <div class="mb-8">
         <label for="section-select" class="block mb-2 text-lg font-medium">Selecione a área para gerenciar:</label>
         <select id="section-select" class="form-input w-full p-3" onchange="showForm(this.value)">
+            <option value="upcomingGames">Agenda</option>
+            <option value="recentResults">Eventos</option>
             <option value="news">Notícias</option>
             <option value="board">Diretoria</option>
             <option value="utilities">Utilidades</option>
@@ -49,20 +51,64 @@
     </div>
 
     <div id="forms-container">
-        <div id="form-news" class="form-section">
+        <div id="form-upcomingGames" class="form-section">
+            <h2 class="text-2xl font-bold mb-4">Gerenciar Agenda</h2>
+            <form id="upcomingGames-form" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="hidden" id="upcomingGames-id">
+                <div>
+                    <label for="upcomingGames-date-input" class="block text-sm font-medium mb-1">Data</label>
+                    <input type="date" id="upcomingGames-date-input" class="form-input p-2 w-full">
+                </div>
+                <div>
+                    <label for="upcomingGames-time-input" class="block text-sm font-medium mb-1">Hora</label>
+                    <input type="time" id="upcomingGames-time-input" class="form-input p-2 w-full">
+                </div>
+                <input type="text" id="upcomingGames-teams" placeholder="Descrição do Evento" class="form-input p-2">
+                <input type="text" id="upcomingGames-location" placeholder="Endereço" class="form-input p-2">
+                <input type="url" id="upcomingGames-mapLink" placeholder="Link do Google Maps" class="form-input p-2 col-span-1 md:col-span-2">
+                <div class="col-span-1 md:col-span-2 flex space-x-2">
+                    <button type="submit" class="btn btn-primary">Adicionar / Salvar</button>
+                    <button type="button" onclick="clearForm('upcomingGames')" class="btn btn-secondary">Limpar</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="form-recentResults" class="form-section hidden">
+            <h2 class="text-2xl font-bold mb-4">Gerenciar Eventos</h2>
+            <form id="recentResults-form" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="hidden" id="recentResults-id">
+                 <div>
+                    <label for="recentResults-date-input" class="block text-sm font-medium mb-1">Data</label>
+                    <input type="date" id="recentResults-date-input" class="form-input p-2 w-full">
+                </div>
+                <div>
+                    <label for="recentResults-time-input" class="block text-sm font-medium mb-1">Hora</label>
+                    <input type="time" id="recentResults-time-input" class="form-input p-2 w-full">
+                </div>
+                <input type="text" id="recentResults-match" placeholder="Descrição do Evento" class="form-input p-2">
+                <input type="text" id="recentResults-location" placeholder="Endereço" class="form-input p-2">
+                <input type="url" id="recentResults-mapLink" placeholder="Link do Google Maps" class="form-input p-2 col-span-1 md:col-span-2">
+                <div class="col-span-1 md:col-span-2 flex space-x-2">
+                    <button type="submit" class="btn btn-primary">Adicionar / Salvar</button>
+                    <button type="button" onclick="clearForm('recentResults')" class="btn btn-secondary">Limpar</button>
+                </div>
+            </form>
+        </div>
+        
+        <div id="form-news" class="form-section hidden">
             <h2 class="text-2xl font-bold mb-4">Gerenciar Notícias</h2>
             <form id="news-form" class="grid grid-cols-1 gap-4">
                 <input type="hidden" id="news-id">
-                <input type="date" id="news-date" class="form-input p-2" required>
-                <input type="text" id="news-title" placeholder="Título da Notícia" class="form-input p-2" required>
+                <input type="date" id="news-date" class="form-input p-2">
+                <input type="text" id="news-title" placeholder="Título da Notícia" class="form-input p-2">
                 <div>
                     <label for="news-image-final" class="block text-sm font-medium mb-1">URL da Imagem</label>
                     <div class="url-input-container">
                         <span class="url-base" id="news-baseUrl">https://lh3.googleusercontent.com/d/</span>
-                        <input type="text" id="news-image-final" class="url-final-input" placeholder="cole o final da URL aqui" required>
+                        <input type="text" id="news-image-final" class="url-final-input" placeholder="cole o final da URL aqui">
                     </div>
                 </div>
-                <textarea id="news-text" placeholder="Texto da Notícia" rows="5" class="form-input p-2" required></textarea>
+                <textarea id="news-text" placeholder="Texto da Notícia" rows="5" class="form-input p-2"></textarea>
                 <div class="flex space-x-2">
                     <button type="submit" class="btn btn-primary">Adicionar / Salvar</button>
                     <button type="button" onclick="clearForm('news')" class="btn btn-secondary">Limpar</button>
@@ -74,8 +120,8 @@
             <h2 class="text-2xl font-bold mb-4">Gerenciar Diretoria</h2>
             <form id="board-form" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input type="hidden" id="board-id">
-                <input type="text" id="board-name" placeholder="Nome do Membro" class="form-input p-2" required>
-                 <select id="board-role" class="form-input p-2" required>
+                <input type="text" id="board-name" placeholder="Nome do Membro" class="form-input p-2">
+                 <select id="board-role" class="form-input p-2">
                     <option value="">Selecione o Cargo</option>
                     <option value="Presidente">Presidente</option>
                     <option value="Vice-presidente">Vice-presidente</option>
@@ -88,7 +134,7 @@
                     <label for="board-image-final" class="block text-sm font-medium mb-1">URL da Foto</label>
                     <div class="url-input-container">
                         <span class="url-base" id="board-baseUrl">https://lh3.googleusercontent.com/d/1</span>
-                        <input type="text" id="board-image-final" class="url-final-input" placeholder="cole o final da URL aqui" required>
+                        <input type="text" id="board-image-final" class="url-final-input" placeholder="cole o final da URL aqui">
                     </div>
                 </div>
                 <div class="col-span-1 md:col-span-2 flex space-x-2">
@@ -102,18 +148,18 @@
             <h2 class="text-2xl font-bold mb-4">Gerenciar Utilidades</h2>
             <form id="utilities-form" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input type="hidden" id="utilities-id">
-                <input type="text" id="utilities-name" placeholder="Nome (Ex: Posto de Saúde)" class="form-input p-2 col-span-1 md:col-span-2" required>
-                <textarea id="utilities-description" placeholder="Descrição breve" rows="3" class="form-input p-2 col-span-1 md:col-span-2" required></textarea>
-                <input type="text" id="utilities-address" placeholder="Endereço" class="form-input p-2" required>
-                <input type="tel" id="utilities-phone" placeholder="Telefone" class="form-input p-2" required>
+                <input type="text" id="utilities-name" placeholder="Nome (Ex: Posto de Saúde)" class="form-input p-2 col-span-1 md:col-span-2">
+                <textarea id="utilities-description" placeholder="Descrição breve" rows="3" class="form-input p-2 col-span-1 md:col-span-2"></textarea>
+                <input type="text" id="utilities-address" placeholder="Endereço" class="form-input p-2">
+                <input type="tel" id="utilities-phone" placeholder="Telefone" class="form-input p-2">
                 <div class="col-span-1 md:col-span-2">
                     <label for="utilities-image-final" class="block text-sm font-medium mb-1">URL da Imagem/Logo</label>
                     <div class="url-input-container">
                         <span class="url-base" id="utilities-baseUrl">https://lh3.googleusercontent.com/d/1</span>
-                        <input type="text" id="utilities-image-final" class="url-final-input" placeholder="cole o final da URL aqui" required>
+                        <input type="text" id="utilities-image-final" class="url-final-input" placeholder="cole o final da URL aqui">
                     </div>
                 </div>
-                <input type="url" id="utilities-link" placeholder="Link (Site, Instagram, etc.)" class="form-input p-2 col-span-1 md:col-span-2" required>
+                <input type="url" id="utilities-link" placeholder="Link (Site, Instagram, etc.)" class="form-input p-2 col-span-1 md:col-span-2">
                  <div class="col-span-1 md:col-span-2 flex space-x-2">
                     <button type="submit" class="btn btn-primary">Adicionar / Salvar</button>
                     <button type="button" onclick="clearForm('utilities')" class="btn btn-secondary">Limpar</button>
@@ -142,12 +188,14 @@
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
 
-        let currentSection = 'news';
+        let currentSection = 'upcomingGames';
 
         const sections = {
-            news:      { dbRef: 'news', formId: 'news-form' },
-            board:     { dbRef: 'board', formId: 'board-form' },
-            utilities: { dbRef: 'utilities', formId: 'utilities-form' }
+            upcomingGames: { dbRef: 'upcomingGames', formId: 'upcomingGames-form' },
+            recentResults: { dbRef: 'recentResults', formId: 'recentResults-form' },
+            news:          { dbRef: 'news', formId: 'news-form' },
+            board:         { dbRef: 'board', formId: 'board-form' },
+            utilities:     { dbRef: 'utilities', formId: 'utilities-form' }
         };
         
         window.showForm = (sectionName) => {
@@ -163,9 +211,7 @@
             form.reset();
             document.getElementById(`${sectionName}-id`).value = '';
             const urlFinalInput = form.querySelector(`#${sectionName}-image-final`);
-            if (urlFinalInput) {
-                urlFinalInput.value = '';
-            }
+            if (urlFinalInput) { urlFinalInput.value = ''; }
         };
 
         window.editItem = async (key) => {
@@ -180,6 +226,12 @@
                 if (element.id && data[element.name]) {
                     element.value = data[element.name];
                 }
+            }
+
+            if (data.date && (currentSection === 'upcomingGames' || currentSection === 'recentResults')) {
+                const dateObj = new Date(data.date);
+                document.getElementById(`${currentSection}-date-input`).value = dateObj.toISOString().split('T')[0];
+                document.getElementById(`${currentSection}-time-input`).value = dateObj.toTimeString().split(' ')[0].substring(0, 5);
             }
 
             if ((currentSection === 'news' || currentSection === 'board' || currentSection === 'utilities') && data.image) {
@@ -222,6 +274,16 @@
                 }
             }
 
+            if (currentSection === 'upcomingGames' || currentSection === 'recentResults') {
+                const dateValue = form.elements[`${currentSection}-date-input`].value;
+                const timeValue = form.elements[`${currentSection}-time-input`].value;
+                if (dateValue && timeValue) {
+                    data.date = new Date(`${dateValue}T${timeValue}`).toISOString();
+                }
+                delete data[`${currentSection}-date-input`];
+                delete data[`${currentSection}-time-input`];
+            }
+
             if (currentSection === 'news' || currentSection === 'board' || currentSection === 'utilities') {
                 const baseUrl = document.getElementById(`${currentSection}-baseUrl`).innerText;
                 const urlFinal = document.getElementById(`${currentSection}-image-final`).value;
@@ -241,7 +303,7 @@
                 const form = document.getElementById(sections[sectionName].formId);
                 for (const element of form.elements) {
                     if (element.id && !element.name) {
-                        element.name = element.id.replace(`${sectionName}-`, '');
+                        element.name = element.id.replace(`${sectionName}-`, '').replace('-input', '');
                     }
                 }
             });
@@ -252,7 +314,7 @@
             window.backupData = async () => { try { const snapshot = await get(ref(database)); if (!snapshot.exists()) { alert("Nenhum dado para fazer backup."); return; } const data = snapshot.val(); const jsonData = JSON.stringify(data, null, 2); const blob = new Blob([jsonData], { type: 'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; const date = new Date().toISOString().slice(0, 10); a.download = `backup-amjjk-${date}.json`; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); } catch (error) { alert("Erro ao fazer backup: " + error.message); } };
             window.restoreData = (event) => { const file = event.target.files[0]; if (!file) return; if (!confirm("ATENÇÃO: Isso irá substituir TODOS os dados atuais. Deseja continuar?")) { event.target.value = ''; return; } const reader = new FileReader(); reader.onload = (e) => { try { const jsonData = JSON.parse(e.target.result); set(ref(database), jsonData).then(() => alert("Backup restaurado com sucesso! A página será recarregada.")).then(() => location.reload()).catch(error => alert("Erro ao restaurar: " + error.message)); } catch (error) { alert("Erro: O arquivo selecionado não é um JSON válido."); } finally { event.target.value = ''; } }; reader.readAsText(file); };
             
-            fetchData = () => { const dataRef = ref(database, sections[currentSection].dbRef); const display = document.getElementById('data-display'); display.innerHTML = 'Carregando...'; onValue(dataRef, (snapshot) => { display.innerHTML = ''; const data = snapshot.val(); if (data) { let items = Object.entries(data); if (items.length > 0 && items[0][1].date) { items.sort(([, a], [, b]) => new Date(b.date) - new Date(a.date)); } items.forEach(([key, item]) => { const title = item.title || item.name; const itemDiv = document.createElement('div'); itemDiv.className = 'bg-gray-700 p-3 rounded flex justify-between items-center'; itemDiv.innerHTML = `<span>${title}</span><div><button onclick="editItem('${key}')" class="btn btn-secondary py-1 px-2 text-sm">Editar</button><button onclick="deleteItem('${key}')" class="btn btn-danger py-1 px-2 text-sm">Excluir</button></div>`; display.appendChild(itemDiv); }); } else { display.innerHTML = '<p>Nenhum dado encontrado.</p>'; } }); };
+            fetchData = () => { const dataRef = ref(database, sections[currentSection].dbRef); const display = document.getElementById('data-display'); display.innerHTML = 'Carregando...'; onValue(dataRef, (snapshot) => { display.innerHTML = ''; const data = snapshot.val(); if (data) { let items = Object.entries(data); if (items.length > 0 && items[0][1].date) { items.sort(([, a], [, b]) => new Date(b.date) - new Date(a.date)); } items.forEach(([key, item]) => { const title = item.title || item.teams || item.match || item.name; const itemDiv = document.createElement('div'); itemDiv.className = 'bg-gray-700 p-3 rounded flex justify-between items-center'; itemDiv.innerHTML = `<span>${title}</span><div><button onclick="editItem('${key}')" class="btn btn-secondary py-1 px-2 text-sm">Editar</button><button onclick="deleteItem('${key}')" class="btn btn-danger py-1 px-2 text-sm">Excluir</button></div>`; display.appendChild(itemDiv); }); } else { display.innerHTML = '<p>Nenhum dado encontrado.</p>'; } }); };
 
             setupFormNames();
             Object.keys(sections).forEach(key => {
