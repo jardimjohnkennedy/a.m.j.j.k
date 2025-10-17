@@ -200,6 +200,7 @@
             utilities:     { dbRef: 'utilities', formId: 'utilities-form' }
         };
 
+        // --- FUNÇÃO ATUALIZADA ---
         window.fetchData = () => {
             const dataRef = ref(database, sections[currentSection].dbRef);
             const display = document.getElementById('data-display');
@@ -210,18 +211,61 @@
                 const data = snapshot.val();
                 if (data) {
                     let items = Object.entries(data);
+                    // Ordena por data (mais recente primeiro) se o item tiver uma data
                     if (items.length > 0 && items[0][1].date) {
                         items.sort(([, a], [, b]) => new Date(b.date) - new Date(a.date));
                     }
+                    
                     items.forEach(([key, item]) => {
-                        const title = item.title || item.teams || item.match || item.name;
                         const itemDiv = document.createElement('div');
-                        itemDiv.className = 'bg-gray-700 p-3 rounded flex justify-between items-center';
-                        itemDiv.innerHTML = `<span>${title || 'Item sem título'}</span>
-                                           <div>
-                                               <button onclick="editItem('${key}')" class="btn btn-secondary py-1 px-2 text-sm">Editar</button>
-                                               <button onclick="deleteItem('${key}')" class="btn btn-danger py-1 px-2 text-sm">Excluir</button>
-                                           </div>`;
+                        itemDiv.className = 'bg-gray-700 p-3 rounded flex justify-between items-center space-x-4';
+                        let contentHtml = '';
+
+                        // Lógica condicional para exibir dados com base na seção
+                        if (currentSection === 'upcomingGames' || currentSection === 'recentResults') {
+                            // AGENDA e EVENTOS
+                            const description = item.teams || item.match || 'Sem descrição';
+                            const location = item.location || 'Sem local';
+                            const formattedDate = item.date 
+                                ? new Date(item.date).toLocaleString('pt-BR', { 
+                                    day: '2-digit', month: '2-digit', year: 'numeric', 
+                                    hour: '2-digit', minute: '2-digit' 
+                                  }) 
+                                : 'Sem data';
+
+                            contentHtml = `
+                                <div class="flex-1 min-w-0">
+                                    <strong class="block truncate" title="${description}">${description}</strong>
+                                    <span class="text-sm text-gray-300">${formattedDate}</span>
+                                    <span class="text-sm text-gray-300 mx-2">|</span>
+                                    <span class="text-sm text-gray-300 truncate" title="${location}">${location}</span>
+                                </div>
+                            `;
+                        } else if (currentSection === 'board') {
+                            // DIRETORIA
+                            const name = item.name || 'Sem nome';
+                            const role = item.role || 'Sem cargo';
+                            // "Data da última alteração" não é um campo salvo, então exibimos Nome e Cargo.
+                            contentHtml = `
+                                <div class="flex-1 min-w-0">
+                                    <strong class="block truncate" title="${name}">${name}</strong>
+                                    <span class="text-sm text-gray-300">${role}</span>
+                                </div>
+                            `;
+                        } else {
+                            // Padrão (Notícias e Utilidades)
+                            const title = item.title || item.name || 'Item sem título';
+                            contentHtml = `<span class="flex-1 min-w-0 truncate" title="${title}">${title}</span>`;
+                        }
+
+                        // Adiciona o conteúdo e os botões
+                        itemDiv.innerHTML = `
+                            ${contentHtml}
+                            <div class="flex-shrink-0">
+                                <button onclick="editItem('${key}')" class="btn btn-secondary py-1 px-2 text-sm">Editar</button>
+                                <button onclick="deleteItem('${key}')" class="btn btn-danger py-1 px-2 text-sm">Excluir</button>
+                            </div>
+                        `;
                         display.appendChild(itemDiv);
                     });
                 } else {
@@ -229,6 +273,7 @@
                 }
             }, { onlyOnce: false });
         };
+        // --- FIM DA FUNÇÃO ATUALIZADA ---
         
         window.showForm = (sectionName) => {
             currentSection = sectionName;
