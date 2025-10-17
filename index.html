@@ -8,14 +8,14 @@
     <style>
         body {
             font-family: 'Inter', sans-serif; margin: 0; padding: 0; background-color: black;
-            background-image: url('https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/background%20.png');
+            background-image: url('https://github.com/jardimjohnkennedy/kendence/blob/main/background%20.png');
             background-size: cover; background-repeat: no-repeat; background-position: center; background-attachment: fixed; overflow-y: auto;
         }
         .splash-screen {
             display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;
             text-align: center; color: white; transition: opacity 1s ease-in-out; position: fixed;
             top: 0; left: 0; width: 100%; z-index: 100;
-            background-image: url('https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/baner_patrocinio.png');
+            background-image: url('https://github.com/jardimjohnkennedy/kendence/blob/main/baner_patrocinio.png');
             background-size: cover; background-position: center;
         }
         .splash-screen.hidden { opacity: 0; pointer-events: none; }
@@ -43,27 +43,27 @@
 <body>
     <div class="whatsapp-widget">
         <a href="https://wa.me/554399597429" target="_blank" class="whatsapp-btn">
-            <img src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/logo_whats.png" alt="WhatsApp Icon" class="w-8 h-8 object-contain">
+            <img src="https://github.com/jardimjohnkennedy/kendence/blob/main/logo_whats.png" alt="WhatsApp Icon" class="w-8 h-8 object-contain">
         </a>
         <span class="whatsapp-text">Contato</span>
     </div>
     <div class="android-widget">
         <a href="https://drive.google.com/file/d/1qBB8JcnsnT99cPWLvD-GVgq8BrycJBP_/view" target="_blank" class="android-btn">
-            <img src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/logo_app.png" alt="App Icon" class="w-11 h-11 object-contain">
+            <img src="https://github.com/jardimjohnkennedy/kendence/blob/main/logo_app.png" alt="App Icon" class="w-11 h-11 object-contain">
         </a>
         <span class="android-text">APP Android</span>
     </div>
 
     <div id="splashScreen" class="splash-screen">
         <div class="image-container">
-            <img id="logo1" src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/brasao_1.png" alt="Logo 1" class="blinking-logo">
-            <img id="logo2" src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/brasao_2.png" alt="Logo 2" class="blinking-logo hidden">
+            <img id="logo1" src="https://github.com/jardimjohnkennedy/kendence/blob/main/brasao_1.png" alt="Logo 1" class="blinking-logo">
+            <img id="logo2" src="https://github.com/jardimjohnkennedy/kendence/blob/main/brasao_2.png" alt="Logo 2" class="blinking-logo hidden">
         </div>
     </div>
 
     <div id="mainContent" class="main-content min-h-screen flex-grow mx-auto px-2 overflow-y-auto">
         <header class="w-full text-white text-center">
-            <img src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/logo.png" alt="Brasão da A.M.J.J.K" class="w-full object-cover mt-0">
+            <img src="https://github.com/jardimjohnkennedy/kendence/blob/main/logo.png" alt="Brasão da A.M.J.J.K" class="w-full object-cover mt-0">
         </header>
 
         <main class="w-full p-6 mt-auto" id="mainSection">
@@ -144,6 +144,7 @@
         const LOGIN_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Acesso Restrito</h2><form onsubmit="handleLogin(event)" class="space-y-4 w-full"><input type="text" id="username" placeholder="Login" class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none"><input type="password" id="password" placeholder="Senha" class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none"><button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg">Entrar</button></form><div id="loginMessage" class="mt-4 text-center"></div></div></div>`;
         const FULL_NEWS_TEMPLATE = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Notícias Completas</h2><div class="space-y-6 w-full" id="fullNewsContent"></div></div></div>`;
         
+        // --- FUNÇÃO DIRETORIA (MODIFICADA) ---
         async function getBoardContent() {
             const snapshot = await get(ref(database, 'board'));
             if (!snapshot.exists()) return '<p>Nenhum membro da diretoria encontrado.</p>';
@@ -151,8 +152,22 @@
             let contentHTML = roles.map(role => {
                 const membersInRole = Object.values(snapshot.val()).filter(p => p.role === role);
                 if (membersInRole.length === 0) return '';
-                return `<h3 class="text-lg font-bold mt-4">${role}</h3>` + membersInRole.map(p => `<div class="flex items-center bg-gray-200 text-gray-800 font-bold py-3 px-4 rounded-lg"><img src="${p.image}" alt="${p.name}" class="w-11 h-11 rounded-full mr-2 object-cover">${p.name}</div>`).join('');
+                
+                const membersHTML = membersInRole.map(p => {
+                    const memberContent = `<img src="${p.image}" alt="${p.name}" class="w-11 h-11 rounded-full mr-2 object-cover">${p.name}`;
+                    
+                    // Se houver link de instagram, o item se torna um link clicável
+                    if (p.instagram && p.instagram.trim() !== '') {
+                        return `<a href="${p.instagram}" target="_blank" class="flex items-center bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-lg transition-colors">${memberContent}</a>`;
+                    } else {
+                        // Senão, é apenas um display de informação
+                        return `<div class="flex items-center bg-gray-200 text-gray-800 font-bold py-3 px-4 rounded-lg">${memberContent}</div>`;
+                    }
+                }).join('');
+
+                return `<h3 class="text-lg font-bold mt-4">${role}</h3>` + membersHTML;
             }).join('');
+            
             return `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Diretoria</h2><div class="space-y-4 overflow-y-auto w-full h-full">${contentHTML}</div></div></div>`;
         }
 
@@ -279,4 +294,3 @@
     </script>
 </body>
 </html>
-
