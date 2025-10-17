@@ -133,10 +133,12 @@
                 <div class="col-span-1 md:col-span-2">
                     <label for="board-image-final" class="block text-sm font-medium mb-1">URL da Foto</label>
                     <div class="url-input-container">
-                        <span class="url-base" id="board-baseUrl">https://lh3.googleusercontent.com/d/1</span>
+                        <span class="url-base" id="board-baseUrl">https://lh3.googleusercontent.com/d/</span>
                         <input type="text" id="board-image-final" class="url-final-input" placeholder="cole o final da URL aqui">
                     </div>
                 </div>
+                <input type="url" id="board-instagram" placeholder="Link do Instagram (opcional)" class="form-input p-2 col-span-1 md:col-span-2">
+
                 <div class="col-span-1 md:col-span-2 flex space-x-2">
                     <button type="submit" class="btn btn-primary">Adicionar / Salvar</button>
                     <button type="button" onclick="clearForm('board')" class="btn btn-secondary">Limpar</button>
@@ -155,7 +157,7 @@
                 <div class="col-span-1 md:col-span-2">
                     <label for="utilities-image-final" class="block text-sm font-medium mb-1">URL da Imagem/Logo</label>
                     <div class="url-input-container">
-                        <span class="url-base" id="utilities-baseUrl">https://lh3.googleusercontent.com/d/1</span>
+                        <span class="url-base" id="utilities-baseUrl">https://lh3.googleusercontent.com/d/</span>
                         <input type="text" id="utilities-image-final" class="url-final-input" placeholder="cole o final da URL aqui">
                     </div>
                 </div>
@@ -198,8 +200,6 @@
             utilities:     { dbRef: 'utilities', formId: 'utilities-form' }
         };
 
-        // --- CORREÇÃO APLICADA AQUI ---
-        // A função fetchData foi movida para o escopo global (anexada a 'window')
         window.fetchData = () => {
             const dataRef = ref(database, sections[currentSection].dbRef);
             const display = document.getElementById('data-display');
@@ -210,7 +210,6 @@
                 const data = snapshot.val();
                 if (data) {
                     let items = Object.entries(data);
-                    // Ordena por data, se o item tiver essa propriedade
                     if (items.length > 0 && items[0][1].date) {
                         items.sort(([, a], [, b]) => new Date(b.date) - new Date(a.date));
                     }
@@ -228,14 +227,14 @@
                 } else {
                     display.innerHTML = '<p>Nenhum dado encontrado.</p>';
                 }
-            }, { onlyOnce: false }); // Garante que a lista atualize em tempo real
+            }, { onlyOnce: false });
         };
         
         window.showForm = (sectionName) => {
             currentSection = sectionName;
             document.querySelectorAll('.form-section').forEach(form => form.classList.add('hidden'));
             document.getElementById(`form-${sectionName}`).classList.remove('hidden');
-            window.fetchData(); // Chama a função global fetchData
+            window.fetchData();
             clearForm(currentSection);
         };
 
@@ -352,4 +351,3 @@
     </script>
 </body>
 </html>
-
