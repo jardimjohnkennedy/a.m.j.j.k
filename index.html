@@ -138,7 +138,29 @@
         }
 
         const archiveFolders = [ { name: 'FOTOS E VIDEOS', driveLink: 'https://drive.google.com/drive/folders/1MPieySZltQ69euP81L9o2V08wlC_4JQu?usp=drive_link' }, { name: 'DOCUMENTOS', driveLink: 'https://drive.google.com/drive/folders/1BNs1TjGhXATk8STdXLheeV3UIsTzaAkE?usp=drive_link' }];
-        const HISTORY_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">História da Associação</h2><img src="https://lh3.googleusercontent.com/d/19tMWJUs5rl403bm4Qz7R3Vep8Lg14qYV" alt="História" class="w-full h-auto rounded-lg mb-4"><div class="space-y-4 overflow-y-auto w-full h-full"><p class="text-gray-200">História da associação...</p></div></div></div>`;
+        const HISTORY_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">História da Associação</h2><img src="https://www.ibipora.pr.gov.br/uploads/noticia/c2fbc36fa981312dd851d4c9f696ef28.jpg" alt="História" class="w-full h-auto rounded-lg mb-4"><div class="space-y-4 overflow-y-auto w-full h-full"><p class="text-gray-200"><p>O Jardim John Kennedy se destaca como um dos bairros mais antigos e tradicionais de Ibiporã, no Paraná. Com uma história rica e uma comunidade engajada, o bairro representa a união perfeita entre o desenvolvimento histórico do município e a contínua busca por qualidade de vida para seus moradores.<p>
+
+<p>**Raízes Históricas**<p>
+
+<p>As origens do bairro remontam, pelo menos, à década de 1970. Já consolidado como uma comunidade em crescimento, um marco importante de sua história inicial foi a inauguração de um poço artesiano em novembro de 1979, na então chamada "Vila Kennedy". Este evento demonstra a importância que o bairro já possuía naquela época, sendo alvo de investimentos em infraestrutura para atender sua crescente população.<p>
+
+<p> **A Força da Comunidade: A Associação de Moradores**<p>
+
+<p>O forte senso de comunidade do Jardim John Kennedy é personificado por sua atuante Associação de Moradores, que historicamente tem sido a voz da população na busca por melhorias e na organização de eventos locais. Embora os registros do primeiro presidente não sejam facilmente acessíveis, a liderança da associação tem sido fundamental para o progresso do bairro.<p>
+
+<p>Ao longo dos anos, a associação foi conduzida por figuras dedicadas que lutaram pelos interesses dos moradores. Entre os líderes que marcaram a história recente, destacam-se:<p>
+
+<p>**Marlene Rosa de Almeida Costa**, eleita presidente em 2012, com um trabalho reconhecido na comunidade.<p>
+<p>**Simone Pinto**, que esteve à frente da associação em 2019, período em que importantes obras de revitalização foram entregues ao bairro.<p>
+<p>**Marcelo Augusto**, que assume a presidência no ano de 2025, dando continuidade ao legado de representatividade e trabalho em prol do Jardim John Kennedy.<p>
+
+<p>**Desenvolvimento e Olhar para o Futuro**<p>
+
+<p>Acompanhando o crescimento de Ibiporã, o bairro tem sido palco de constantes melhorias. Em 2019, passou por uma significativa revitalização, e os investimentos não pararam.<p>
+
+<p>Olhando para o futuro, em outubro de 2025, o bairro se prepara para receber um novo e moderno complexo de lazer, com a construção de uma quadra poliesportiva, playground e pista de caminhada. Essas obras reforçam o compromisso do poder público e da comunidade em tornar o Jardim John Kennedy um lugar cada vez melhor para se viver.<p>
+
+<p>Dessa forma, o Jardim John Kennedy se firma não apenas como um endereço, mas como uma comunidade viva, que valoriza seu passado, fortalece seu presente através da união de seus moradores e investe em um futuro com mais bem-estar e infraestrutura para todos.<p></p></div></div></div>`;
         const SOCIAL_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Redes Sociais</h2><div class="space-y-4 w-full"><a href="#" target="_blank" class="block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg text-center">Facebook</a><a href="#" target="_blank" class="block bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-4 rounded-lg text-center">Instagram</a><button onclick="showSection('user-login')" class="block w-full bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg text-center">Acesso Restrito</button></div></div></div>`;
         const ARCHIVE_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Acervo</h2><p class="text-gray-200 text-center mb-4">Selecione uma pasta para ver.</p><div class="space-y-4 overflow-y-auto w-full h-full">${archiveFolders.map(f => `<a href="${f.driveLink}" target="_blank" class="block w-full bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-lg text-center"><h3 class="font-bold">${f.name}</h3></a>`).join('')}</div></div></div>`;
         const LOGIN_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Acesso Restrito</h2><form onsubmit="handleLogin(event)" class="space-y-4 w-full"><input type="text" id="username" placeholder="Login" class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none"><input type="password" id="password" placeholder="Senha" class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none"><button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg">Entrar</button></form><div id="loginMessage" class="mt-4 text-center"></div></div></div>`;
@@ -294,4 +316,5 @@
     </script>
 </body>
 </html>
+
 
