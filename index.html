@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kendence F.C.</title>
+    <title>A.M.J.J.K</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif; margin: 0; padding: 0; background-color: black;
-            background-image: url('https://raw.githubusercontent.com/jardimjohnkennedy/kendence/refs/heads/main/background%20.png');
+            background-image: url('https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/background%20.png');
             background-size: cover; background-repeat: no-repeat; background-position: center; background-attachment: fixed; overflow-y: auto;
         }
         .splash-screen {
             display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;
             text-align: center; color: white; transition: opacity 1s ease-in-out; position: fixed;
             top: 0; left: 0; width: 100%; z-index: 100;
-            background-image: url('https://raw.githubusercontent.com/jardimjohnkennedy/kendence/refs/heads/main/baner_patrocinio.png');
+            background-image: url('https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/baner_patrocinio.png');
             background-size: cover; background-position: center;
         }
         .splash-screen.hidden { opacity: 0; pointer-events: none; }
@@ -42,28 +42,28 @@
 </head>
 <body>
     <div class="whatsapp-widget">
-        <a href="https://wa.me/5543998202218" target="_blank" class="whatsapp-btn">
-            <img src="https://raw.githubusercontent.com/jardimjohnkennedy/kendence/refs/heads/main/logo_whats.png" alt="WhatsApp Icon" class="w-8 h-8 object-contain">
+        <a href="https://wa.me/554399597429" target="_blank" class="whatsapp-btn">
+            <img src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/logo_whats.png" alt="WhatsApp Icon" class="w-8 h-8 object-contain">
         </a>
         <span class="whatsapp-text">Contato</span>
     </div>
     <div class="android-widget">
         <a href="https://drive.google.com/file/d/1qBB8JcnsnT99cPWLvD-GVgq8BrycJBP_/view" target="_blank" class="android-btn">
-            <img src="https://raw.githubusercontent.com/jardimjohnkennedy/kendence/refs/heads/main/logo_app.png" alt="App Icon" class="w-12 h-12 object-contain">
+            <img src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/logo_app.png" alt="App Icon" class="w-12 h-12 object-contain">
         </a>
         <span class="android-text">APP Android</span>
     </div>
 
     <div id="splashScreen" class="splash-screen">
         <div class="image-container">
-            <img id="logo1" src="https://raw.githubusercontent.com/jardimjohnkennedy/kendence/refs/heads/main/brasao_1.png" alt="Logo do Clube 1" class="blinking-logo">
-            <img id="logo2" src="https://raw.githubusercontent.com/jardimjohnkennedy/kendence/refs/heads/main/brasao_2.png" alt="Logo do Clube 2" class="blinking-logo hidden">
+            <img id="logo1" src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/brasao_1.png" alt="Logo do Clube 1" class="blinking-logo">
+            <img id="logo2" src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/brasao_2.png" alt="Logo do Clube 2" class="blinking-logo hidden">
         </div>
     </div>
 
     <div id="mainContent" class="main-content min-h-screen flex-grow mx-auto px-2 overflow-y-auto">
         <header class="w-full text-white text-center">
-            <img src="https://raw.githubusercontent.com/jardimjohnkennedy/kendence/refs/heads/main/logo.png" alt="Brasão do Kendence F.C." class="w-full object-cover mt-0">
+            <img src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/logo.png" alt="Brasão do Kendence F.C." class="w-full object-cover mt-0">
         </header>
 
         <main class="w-full p-6 mt-auto" id="mainSection">
@@ -75,10 +75,10 @@
             
             <div id="navButtons" class="flex flex-col items-end space-y-4 w-full mt-5 hidden">
                 <button onclick="showSection('fullNews')" class="btn-base bg-transparent hover:bg-gray-800 text-white font-bold">NOTICIAS</button>
-                <button onclick="showSection('players')" class="btn-base bg-transparent hover:bg-gray-800 text-white font-bold">JOGADORES</button>
+                <button onclick="showSection('players')" class="btn-base bg-transparent hover:bg-gray-800 text-white font-bold">DIRETORIA</button>
                 <button onclick="showSection('history')" class="btn-base bg-transparent hover:bg-gray-800 text-white font-bold">HISTÓRIA</button>
                 <button onclick="showSection('social')" class="btn-base bg-transparent hover:bg-gray-800 text-white font-bold">REDES SOCIAIS</button>
-                <button onclick="showSection('sponsorship')" class="btn-base bg-transparent hover:bg-gray-800 text-white font-bold">PATROCÍNIO</button>
+                <button onclick="showSection('sponsorship')" class="btn-base bg-transparent hover:bg-gray-800 text-white font-bold">UTILIDADE</button>
                 <button onclick="showSection('gallery')" class="btn-base bg-transparent hover:bg-gray-800 text-white font-bold">GALERIA</button>
             </div>
             
@@ -86,9 +86,9 @@
             
             <div id="newsSection" class="mt-8 p-4 rounded-lg shadow-inner section-container overflow-y-auto w-full h-full">
                 <div class="space-y-6 w-full" id="latestNews"></div>
-                <h2 class="text-2xl font-bold mt-8 mb-4 text-center">Próximos Jogos</h2>
+                <h2 class="text-2xl font-bold mt-8 mb-4 text-center">AGENDA</h2>
                 <div id="upcomingGames" class="flex overflow-x-auto space-x-4 pb-4"></div>
-                <h2 class="text-2xl font-bold mt-8 mb-4 text-center">Resultados Recentes</h2>
+                <h2 class="text-2xl font-bold mt-8 mb-4 text-center">EVENTOS</h2>
                 <div id="recentResults" class="flex overflow-x-auto space-x-4 pb-4"></div>
             </div>
             
@@ -100,7 +100,7 @@
         
         <footer class="w-full text-white p-6 text-center mt-auto">
             <div class="space-y-2 text-sm">
-                <p><strong>Para marcar dia de jogos e campeonatos, entre em contato pelo nosso WhatsApp!</strong> </p>
+                <p><strong> Para a denúncia , reclamação ou sugestão, entre em contato pelo nosso WhatsApp!</strong> </p>
                 <p><strong>By:</strong> A.Yoshi</p>
             </div>
         </footer>
@@ -143,8 +143,26 @@
         }
 
         // --- CONTEÚDO ESTÁTICO E TEMPLATES ---
-        const galleryFolders = [ { name: 'WALLPAPERS', driveLink: 'https://drive.google.com/drive/folders/1ujHIcc87gguhfM5-aZTzCI9MoJ-u4a-p?usp=drive_link' }, { name: 'FOTOS E VIDEOS', driveLink: 'https://drive.google.com/drive/folders/1MPieySZltQ69euP81L9o2V08wlC_4JQu?usp=drive_link' }, { name: 'BRASÃO DO TIME', driveLink: 'https://drive.google.com/drive/folders/1BNs1TjGhXATk8STdXLheeV3UIsTzaAkE?usp=drive_link' }, { name: 'CAMISETAS', driveLink: 'https://drive.google.com/drive/folders/1Z3PidCFqvr9FggAzUEdJkNqgLWtrd-eD?usp=drive_link' }, { name: 'FIGURINHAS', driveLink: 'https://drive.google.com/drive/folders/1BTOeKlLyKpi8or4u2p5a3kxVI-KIQ5AG?usp=drive_link' } ];
-        const HISTORY_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">História do Clube</h2><img src="https://lh3.googleusercontent.com/d/19tMWJUs5rl403bm4Qz7R3Vep8Lg14qYV" alt="História do Clube" class="w-full h-auto rounded-lg mb-4"><div class="space-y-4 overflow-y-auto w-full h-full"><p class="text-gray-200">Fundado em 1987...Hoje, o Kendence segue representando o bairro com orgulho.</p></div></div></div>`;
+        const galleryFolders = [ { name: 'ARQUIVO1', driveLink: 'https://drive' }, { name: 'ARQUIVO2', driveLink: 'https://drive' }, { name: 'ARQUIVO 3', driveLink: 'https://drive' }, { name: 'ARQUICO3', driveLink: 'https://drive' } ];
+        const HISTORY_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">História do Bairro</h2><img src="https://www.ibipora.pr.gov.br/uploads/noticia/c2fbc36fa981312dd851d4c9f696ef28.jpg" alt="História do Bairro" class="w-full h-auto rounded-lg mb-4"><div class="space-y-4 overflow-y-auto w-full h-full"><p class="text-gray-200"><p>O Jardim John Kennedy é reconhecido como um dos bairros mais antigos e tradicionais do município de Ibiporã, no Paraná, documentos históricos indicam que a área já era habitada e recebia melhorias de infraestrutura na década de 1970, consolidando-se como uma comunidade importante da cidade.<p>
+
+<p>O Início da Comunidade<p>
+<p>Registros históricos apontam que em novembro de 1979, a então "Vila Kennedy" recebeu a inauguração de um poço artesiano para atender às necessidades dos moradores. Essa informação, presente no acervo histórico do município, sugere que o bairro já estava estabelecido e em crescimento naquela época, sendo objeto de políticas públicas para a melhoria da qualidade de vida de sua população. Ao longo dos anos, o bairro continuou a se desenvolver, com a Prefeitura realizando obras de infraestrutura como a instalação de galerias pluviais e a construção de pontes para aprimorar as condições locais.<p>
+
+<p>A Associação de Moradores<p>
+<p>A data precisa de fundação da Associação de Moradores do Jardim John Kennedy e o nome de seu primeiro presidente não foram localizados em pesquisas em arquivos digitais, jornais online ou no site da prefeitura. Informações tão específicas sobre a liderança inicial de associações de bairro frequentemente não estão digitalizadas e permanecem em arquivos físicos.<p>
+
+<p>No entanto, é possível traçar um histórico mais recente da liderança da associação, mostrando sua atuação contínua na defesa dos interesses da comunidade:<p>
+
+<p>Marlene Rosa de Almeida Costa: Foi eleita presidente da associação em uma eleição por aclamação realizada em 30 de maio de 2012. Sua posse ocorreu em 13 de junho do mesmo ano, na Escola Municipal Sebastião Luiz de Oliveira.<p>
+
+<p>Simone Pinto: É mencionada como presidente da associação em uma reportagem de dezembro de 2019, durante a entrega de obras de revitalização do bairro pela prefeitura.<p>
+
+<p>Um documento oficial de 2021 também cita Marlene Rosa de Almeida como representante titular e Simone Pinto como suplente da associação em um conselho municipal, indicando a continuidade do trabalho dessas lideranças comunitárias ao longo dos anos.<p>
+
+<p>Recentemente, o bairro continua a ser foco de investimentos, com licitações abertas em outubro de 2025 para a construção de novas áreas de lazer, como quadra poliesportiva, playground e pista de caminhada, reforçando sua importância para o município.<p>
+
+</p></div></div></div>`;
         const SOCIAL_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Redes Sociais</h2><div class="space-y-4 w-full"><a href="https://www.youtube.com/channel/UCVG6kWDq2JIdurnN7LIgmPQ" target="_blank" class="block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg text-center">YouTube</a><a href="https://www.instagram.com/kendence2015/?__pwa=1#" target="_blank" class="block bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-4 rounded-lg text-center">Instagram</a><button onclick="showSection('user-login')" class="block w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg text-center">Usuário (Acesso Restrito)</button></div></div></div>`;
         const GALLERY_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Galeria</h2><p class="text-gray-200 text-center mb-4">Selecione uma pasta para ver as mídias.</p><div class="space-y-4 overflow-y-auto w-full h-full">${galleryFolders.map(f => `<a href="${f.driveLink}" target="_blank" class="block w-full bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-lg text-center"><h3 class="font-bold">${f.name}</h3></a>`).join('')}</div></div></div>`;
         const LOGIN_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Acesso Restrito</h2><form onsubmit="handleLogin(event)" class="space-y-4 w-full"><input type="text" id="username" placeholder="Login" class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none"><input type="password" id="password" placeholder="Senha" class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none"><button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg">Entrar</button></form><div id="loginMessage" class="mt-4 text-center"></div></div></div>`;
@@ -152,8 +170,8 @@
         
         async function getPlayersContent() {
             const snapshot = await get(ref(database, 'players'));
-            if (!snapshot.exists()) return '<p>Nenhum jogador encontrado.</p>';
-            const roles = ['Comissão Técnica', 'Goleiros', 'Zagueiros e Volantes', 'Laterais', 'Meios', 'Atacantes'];
+            if (!snapshot.exists()) return '<p>Nenhuma diretoria encontrada.</p>';
+            const roles = ['Pesidente', 'Vice-Pesidente', '1º Secretario', '2º Secretario', 'Tesoureiro', 'Fiscais'];
             let contentHTML = roles.map(role => {
                 const playersInRole = Object.values(snapshot.val()).filter(p => p.role === role);
                 if (playersInRole.length === 0) return '';
@@ -215,8 +233,8 @@
             event.preventDefault();
             // Lembre-se de preencher os links corretos aqui
             const users = {
-                "AYOSHI": { p: "1985", l: "https://jardimjohnkennedy.github.io/kendence/admin" },
-                "KENDENCE": { p: "1235", l: "https://drive.google.com/drive/folders/1wG2KfMMBXlPYr-wiX7xfO3YotGCEACzM" },
+                "AYOSHI": { p: "1985", l: "https://jardimjohnkennedy.github.io/amjjk/admin" },
+                "Marcelo": { p: "mnarcelo123", l: "https://jardimjohnkennedy.github.io/amjjk/admin" },
                 "andersomyoshi": { p: "#Alfmoto1", l: "https://drive.google.com/drive/folders/1OhaT_CUG3-C_mqvfgiKn6t3eOEI9KxUY?usp=sharing" }
             };
             const u = document.getElementById('username').value.toUpperCase(); // Deixa o login insensível a maiúsculas/minúsculas
@@ -294,6 +312,3 @@
     </script>
 </body>
 </html>
-
-
-
