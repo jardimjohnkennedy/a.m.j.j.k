@@ -8,14 +8,14 @@
     <style>
         body {
             font-family: 'Inter', sans-serif; margin: 0; padding: 0; background-color: black;
-            background-image: url('https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/background%20.png');
+            background-image: url('https://github.com/jardimjohnkennedy/kendence/blob/main/background%20.png');
             background-size: cover; background-repeat: no-repeat; background-position: center; background-attachment: fixed; overflow-y: auto;
         }
         .splash-screen {
             display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;
             text-align: center; color: white; transition: opacity 1s ease-in-out; position: fixed;
             top: 0; left: 0; width: 100%; z-index: 100;
-            background-image: url('https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/baner_patrocinio.png');
+            background-image: url('https://github.com/jardimjohnkennedy/kendence/blob/main/baner_patrocinio.png');
             background-size: cover; background-position: center;
         }
         .splash-screen.hidden { opacity: 0; pointer-events: none; }
@@ -43,27 +43,27 @@
 <body>
     <div class="whatsapp-widget">
         <a href="https://wa.me/554399597429" target="_blank" class="whatsapp-btn">
-            <img src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/logo_whats.png" alt="WhatsApp Icon" class="w-8 h-8 object-contain">
+            <img src="https://github.com/jardimjohnkennedy/kendence/blob/main/logo_whats.png" alt="WhatsApp Icon" class="w-8 h-8 object-contain">
         </a>
         <span class="whatsapp-text">Contato</span>
     </div>
     <div class="android-widget">
         <a href="https://drive.google.com/file/d/1qBB8JcnsnT99cPWLvD-GVgq8BrycJBP_/view" target="_blank" class="android-btn">
-            <img src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/logo_app.png" alt="App Icon" class="w-11 h-11 object-contain">
+            <img src="https://github.com/jardimjohnkennedy/kendence/blob/main/logo_app.png" alt="App Icon" class="w-11 h-11 object-contain">
         </a>
         <span class="android-text">APP Android</span>
     </div>
 
     <div id="splashScreen" class="splash-screen">
         <div class="image-container">
-            <img id="logo1" src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/brasao_1.png" alt="Logo 1" class="blinking-logo">
-            <img id="logo2" src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/brasao_2.png" alt="Logo 2" class="blinking-logo hidden">
+            <img id="logo1" src="https://github.com/jardimjohnkennedy/kendence/blob/main/brasao_1.png" alt="Logo 1" class="blinking-logo">
+            <img id="logo2" src="https://github.com/jardimjohnkennedy/kendence/blob/main/brasao_2.png" alt="Logo 2" class="blinking-logo hidden">
         </div>
     </div>
 
     <div id="mainContent" class="main-content min-h-screen flex-grow mx-auto px-2 overflow-y-auto">
         <header class="w-full text-white text-center">
-            <img src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/logo.png" alt="Brasão da A.M.J.J.K" class="w-full object-cover mt-0">
+            <img src="https://github.com/jardimjohnkennedy/kendence/blob/main/logo.png" alt="Brasão da A.M.J.J.K" class="w-full object-cover mt-0">
         </header>
 
         <main class="w-full p-6 mt-auto" id="mainSection">
@@ -86,6 +86,10 @@
             
             <div id="newsSection" class="mt-8 p-4 rounded-lg shadow-inner section-container overflow-y-auto w-full h-full">
                 <div class="space-y-6 w-full" id="latestNews"></div>
+                <h2 class="text-2xl font-bold mt-8 mb-4 text-center">Agenda</h2>
+                <div id="upcomingGames" class="flex overflow-x-auto space-x-4 pb-4"></div>
+                <h2 class="text-2xl font-bold mt-8 mb-4 text-center">Eventos</h2>
+                <div id="recentResults" class="flex overflow-x-auto space-x-4 pb-4"></div>
             </div>
             
             <div id="fullNewsSection" class="mt-8 p-4 rounded-lg shadow-inner section-container overflow-y-auto w-full h-full hidden">
@@ -123,7 +127,16 @@
         let newsData = [];
         let newsInterval;
 
-        // --- CONTEÚDO ESTÁTICO E TEMPLATES ---
+        function formatDateTime(isoString) {
+            if (!isoString) return '';
+            const date = new Date(isoString);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            return `${day}/${month} - ${hours}:${minutes}`;
+        }
+
         const archiveFolders = [ { name: 'FOTOS E VIDEOS', driveLink: 'https://drive.google.com/drive/folders/1MPieySZltQ69euP81L9o2V08wlC_4JQu?usp=drive_link' }, { name: 'DOCUMENTOS', driveLink: 'https://drive.google.com/drive/folders/1BNs1TjGhXATk8STdXLheeV3UIsTzaAkE?usp=drive_link' }];
         const HISTORY_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">História da Associação</h2><img src="https://lh3.googleusercontent.com/d/19tMWJUs5rl403bm4Qz7R3Vep8Lg14qYV" alt="História" class="w-full h-auto rounded-lg mb-4"><div class="space-y-4 overflow-y-auto w-full h-full"><p class="text-gray-200">História da associação...</p></div></div></div>`;
         const SOCIAL_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Redes Sociais</h2><div class="space-y-4 w-full"><a href="#" target="_blank" class="block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg text-center">Facebook</a><a href="#" target="_blank" class="block bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-4 rounded-lg text-center">Instagram</a><button onclick="showSection('user-login')" class="block w-full bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg text-center">Acesso Restrito</button></div></div></div>`;
@@ -132,7 +145,7 @@
         const FULL_NEWS_TEMPLATE = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Notícias Completas</h2><div class="space-y-6 w-full" id="fullNewsContent"></div></div></div>`;
         
         async function getBoardContent() {
-            const snapshot = await get(ref(database, 'board')); // Alterado de 'players' para 'board'
+            const snapshot = await get(ref(database, 'board'));
             if (!snapshot.exists()) return '<p>Nenhum membro da diretoria encontrado.</p>';
             const roles = ['Presidente', 'Vice-presidente', '1º Secretário', '2º Secretário', 'Tesoureiro', 'Fiscais'];
             let contentHTML = roles.map(role => {
@@ -144,7 +157,7 @@
         }
 
         async function getUtilitiesContent() {
-            const snapshot = await get(ref(database, 'utilities')); // Alterado de 'sponsors' para 'utilities'
+            const snapshot = await get(ref(database, 'utilities'));
             if (!snapshot.exists()) return '<p>Nenhuma utilidade encontrada.</p>';
             let contentHTML = Object.values(snapshot.val()).map(s => `<div class="mt-6"><img src="${s.image}" alt="${s.name}" class="w-32 h-32 rounded-lg mb-4 mx-auto object-contain"><div class="bg-gray-800 p-4 rounded-lg shadow-md w-full"><h3 class="text-lg font-bold mb-2">${s.name}</h3><p class="text-white text-sm mb-2"><strong>Descrição:</strong> ${s.description}</p><p class="text-white text-sm"><strong>Endereço:</strong> ${s.address}</p><p class="text-white text-sm"><strong>Telefone:</strong> ${s.phone}</p><a href="${s.link}" target="_blank" class="block w-full mt-4 bg-blue-700 hover:bg-blue-900 text-white font-bold py-3 px-4 rounded-lg text-center">Acessar Link</a></div></div>`).join('');
             return `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Utilidades</h2>${contentHTML}</div></div>`;
@@ -221,7 +234,8 @@
         
         async function loadInitialData() {
             try {
-                const newsSnap = await get(ref(database, 'news'));
+                const [newsSnap, gamesSnap, resultsSnap] = await Promise.all([ get(ref(database, 'news')), get(ref(database, 'upcomingGames')), get(ref(database, 'recentResults')) ]);
+
                 if (newsSnap.exists()) {
                     const newsResult = newsSnap.val();
                     newsData = Object.keys(newsResult).map(key => ({ id: key, ...newsResult[key] })).sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -231,6 +245,17 @@
                         newsInterval = setInterval(() => renderSingleNews(newsData), 5000);
                     }
                 }
+
+                if (gamesSnap.exists()) {
+                    const games = Object.values(gamesSnap.val()).sort((a, b) => new Date(b.date) - new Date(a.date));
+                    document.getElementById('upcomingGames').innerHTML = games.map(game => `<div class="flex-none w-full sm:w-80 bg-gray-800 p-4 rounded-lg shadow-md"><p class="text-sm font-semibold">${formatDateTime(game.date)}</p><h3 class="text-lg font-bold mt-1 mb-2">${game.teams}</h3><p class="text-sm text-gray-400">${game.location}</p><a href="${game.mapLink}" target="_blank" class="block mt-3 bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-3 rounded-lg text-center text-sm">Ver Local</a></div>`).join('');
+                }
+
+                if (resultsSnap.exists()) {
+                    const results = Object.values(resultsSnap.val()).sort((a, b) => new Date(b.date) - new Date(a.date));
+                     document.getElementById('recentResults').innerHTML = results.map(result => `<div class="flex-none w-full sm:w-80 bg-gray-800 p-4 rounded-lg shadow-md"><p class="text-sm font-semibold">${formatDateTime(result.date)}</p><h3 class="text-xl font-bold mt-1 mb-2">${result.match}</h3><p class="text-sm text-gray-400">${result.location}</p><a href="${result.mapLink}" target="_blank" class="block mt-3 bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-3 rounded-lg text-center text-sm">Ver Local</a></div>`).join('');
+                }
+
             } catch (error) {
                 console.error("Erro ao carregar dados do Firebase:", error);
                 document.getElementById('latestNews').innerHTML = '<p class="text-center text-red-500">Falha ao carregar dados.</p>';
@@ -254,4 +279,3 @@
     </script>
 </body>
 </html>
-
