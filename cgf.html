@@ -43,6 +43,7 @@
                     <form id="add-member-form" class="space-y-4">
                         <input type="text" id="member-name" placeholder="Nome do membro" class="form-input" required>
                         <input type="number" id="member-salary" placeholder="Salário (R$)" class="form-input" min="0" step="0.01" required>
+                        <input type="number" id="member-closing-day" placeholder="Dia de Fechamento do Cartão (1-31)" class="form-input" min="1" max="31">
                         <button type="submit" class="btn btn-primary w-full justify-center"><i class="fas fa-plus"></i> Adicionar Membro</button>
                     </form>
                     <div id="members-list" class="mt-6 space-y-3"></div>
@@ -128,6 +129,7 @@
                 <input type="hidden" id="edit-member-id">
                 <input type="text" id="edit-member-name" placeholder="Nome do membro" class="form-input" required>
                 <input type="number" id="edit-member-salary" placeholder="Salário (R$)" class="form-input" min="0" step="0.01" required>
+                <input type="number" id="edit-member-closing-day" placeholder="Dia de Fechamento (1-31)" class="form-input" min="1" max="31">
                 <div class="flex justify-end gap-4 mt-4">
                     <button type="button" class="btn btn-secondary close-modal-btn">Cancelar</button>
                     <button type="submit" class="btn btn-primary">Salvar</button>
@@ -291,10 +293,12 @@
                 membersData.sort((a,b) => a.name.localeCompare(b.name)).forEach(member => {
                     const memberElement = document.createElement('div');
                     memberElement.className = 'flex justify-between items-center bg-gray-50 p-3 rounded-lg';
+                    const closingDayText = member.closingDay ? `<p class="text-xs text-gray-500">Fechamento: Dia ${member.closingDay}</p>` : '';
                     memberElement.innerHTML = `
                         <div>
                             <p class="font-bold text-gray-800">${member.name}</p>
                             <p class="text-sm text-green-600">${formatCurrency(member.salary)}</p>
+                            ${closingDayText}
                         </div>
                         <div class="flex gap-3">
                             <button class="action-btn text-blue-500 hover:text-blue-700" data-id="${member.id}" data-action="edit-member"><i class="fas fa-edit"></i></button>
@@ -309,25 +313,50 @@
                 const memberId = filterMemberSelect.value;
                 const month = filterMonthSelect.value;
                 const year = filterYearSelect.value;
+                const member = memberId !== 'all' ? membersData.find(m => m.id === memberId) : null;
+                const closingDay = (member && member.closingDay) ? member.closingDay : null;
 
                 let filteredExpenses = [...expensesData];
+
+                // 1. Filtrar por Membro (sempre)
                 if (memberId !== 'all') {
                     filteredExpenses = filteredExpenses.filter(e => e.memberId === memberId);
                 }
-                if (month !== 'all') {
-                    filteredExpenses = filteredExpenses.filter(e => e.date && new Date(e.date).getUTCMonth() + 1 == month);
-                }
-                if (year !== 'all') {
-                    filteredExpenses = filteredExpenses.filter(e => e.date && new Date(e.date).getUTCFullYear() == year);
+
+                // 2. Determinar qual lógica de filtro de data usar
+                // A lógica de fatura SÓ se aplica se um MEMBRO, MÊS, ANO e DIA DE FECHAMENTO estiverem definidos
+                const useBillingLogic = closingDay && memberId !== 'all' && month !== 'all' && year !== 'all';
+
+                if (useBillingLogic) {
+                    const y = parseInt(year);
+                    const m = parseInt(month); // 1-12
+                    // Início da fatura: dia (fechamento + 1) do mês anterior
+                    const startDate = new Date(Date.UTC(y, m - 2, closingDay + 1)); // m-2 = mês anterior (JS 0-11)
+                    // Fim da fatura: dia (fechamento) do mês selecionado
+                    const endDate = new Date(Date.UTC(y, m - 1, closingDay, 23, 59, 59, 999)); // m-1 = mês atual (JS 0-11)
+
+                    filteredExpenses = filteredExpenses.filter(e => {
+                        if (!e.date) return false;
+                        const expenseDate = new Date(e.date + 'T00:00:00Z'); // Usar T00:00:00Z e Date.UTC para consistência
+                        return expenseDate >= startDate && expenseDate <= endDate;
+                    });
+                } else {
+                    // Lógica de calendário padrão para todos os outros casos
+                    if (month !== 'all') {
+                        filteredExpenses = filteredExpenses.filter(e => e.date && new Date(e.date + 'T00:00:00Z').getUTCMonth() + 1 == month);
+                    }
+                    if (year !== 'all') {
+                        filteredExpenses = filteredExpenses.filter(e => e.date && new Date(e.date + 'T00:00:00Z').getUTCFullYear() == year);
+                    }
                 }
                 
                 const totalSpent = filteredExpenses.reduce((sum, exp) => sum + exp.value, 0);
                 summarySection.innerHTML = ''; 
-                const member = memberId !== 'all' ? membersData.find(m => m.id === memberId) : null;
-
+                
                 if (member && month !== 'all' && year !== 'all') {
                     const remaining = member.salary - totalSpent;
-                    summarySection.innerHTML = `<div class="p-4 bg-gray-100 rounded-lg grid grid-cols-1 md:grid-cols-3 gap-4 text-center"><div><p class="text-sm text-gray-500">Salário Mensal</p><p class="text-2xl font-bold text-green-600">${formatCurrency(member.salary)}</p></div><div><p class="text-sm text-gray-500">Total Gasto no Mês</p><p class="text-2xl font-bold text-red-600">${formatCurrency(totalSpent)}</p></div><div><p class="text-sm text-gray-500">Saldo do Mês</p><p class="text-2xl font-bold ${remaining >= 0 ? 'text-blue-600' : 'text-orange-500'}">${formatCurrency(remaining)}</p></div></div>`;
+                    const summaryTitle = useBillingLogic ? 'Saldo da Fatura' : 'Saldo do Mês'; // Título dinâmico
+                    summarySection.innerHTML = `<div class="p-4 bg-gray-100 rounded-lg grid grid-cols-1 md:grid-cols-3 gap-4 text-center"><div><p class="text-sm text-gray-500">Salário Mensal</p><p class="text-2xl font-bold text-green-600">${formatCurrency(member.salary)}</p></div><div><p class="text-sm text-gray-500">Total Gasto (Período)</p><p class="text-2xl font-bold text-red-600">${formatCurrency(totalSpent)}</p></div><div><p class="text-sm text-gray-500">${summaryTitle}</p><p class="text-2xl font-bold ${remaining >= 0 ? 'text-blue-600' : 'text-orange-500'}">${formatCurrency(remaining)}</p></div></div>`;
                 } else if (filteredExpenses.length > 0) {
                     summarySection.innerHTML = `<div class="p-4 bg-gray-100 rounded-lg text-center"><p class="text-sm text-gray-500">Total Gasto (Período Selecionado)</p><p class="text-2xl font-bold text-red-600">${formatCurrency(totalSpent)}</p></div>`;
                 }
@@ -365,7 +394,13 @@
             // --- EVENT LISTENERS ---
             addMemberForm.addEventListener('submit', (e) => {
                 e.preventDefault();
-                const newMember = { id: generateId(), name: e.target['member-name'].value.trim(), salary: parseFloat(e.target['member-salary'].value) };
+                const closingDay = parseInt(e.target['member-closing-day'].value, 10) || null;
+                const newMember = { 
+                    id: generateId(), 
+                    name: e.target['member-name'].value.trim(), 
+                    salary: parseFloat(e.target['member-salary'].value),
+                    closingDay: closingDay 
+                };
                 membersData.push(newMember);
                 saveData();
                 fullRender();
@@ -396,6 +431,7 @@
 
                         let currentValue = installmentValue;
                         if (i === numInstallments) {
+                            // Ajusta a última parcela para bater o valor total
                             currentValue = totalValue - valueSum;
                         } else {
                             valueSum += currentValue;
@@ -440,6 +476,7 @@
                     editMemberForm['edit-member-id'].value = id;
                     editMemberForm['edit-member-name'].value = member.name;
                     editMemberForm['edit-member-salary'].value = member.salary;
+                    editMemberForm['edit-member-closing-day'].value = member.closingDay || '';
                     showModal(editMemberModal);
                 }
             });
@@ -500,6 +537,7 @@
                     const newName = e.target['edit-member-name'].value;
                     membersData[memberIndex].name = newName;
                     membersData[memberIndex].salary = parseFloat(e.target['edit-member-salary'].value);
+                    membersData[memberIndex].closingDay = parseInt(e.target['edit-member-closing-day'].value, 10) || null;
                     expensesData.forEach(expense => { if (expense.memberId === id) { expense.memberName = newName; } });
                     saveData();
                     fullRender();
@@ -533,7 +571,9 @@
                 if (!member) return;
                 const totalExpenses = expenses.reduce((sum, exp) => sum + exp.value, 0);
                 const remainingBalance = member.salary - totalExpenses;
-                reportContent.innerHTML = `<div class="text-center mb-4"><h3 class="text-lg font-bold">ANDERSON YOSHI CONTABILIDADE</h3><p class="text-sm">RELATÓRIO DE GASTOS PESSOAIS</p></div><div class="border-t border-b border-dashed border-gray-400 my-2 py-2 text-sm"><p><strong>NOME:</strong> ${member.name.toUpperCase()}</p><p><strong>MÊS/ANO:</strong> ${String(month).padStart(2, '0')}/${year}</p><p><strong>SALÁRIO:</strong> ${formatCurrency(member.salary)}</p></div><table class="w-full text-sm my-2"><thead><tr class="border-b border-dashed border-gray-400"><th class="text-left py-1">DATA</th><th class="text-left py-1">DESCRIÇÃO</th><th class="text-right py-1">VALOR</th></tr></thead><tbody>${expenses.sort((a,b) => new Date(a.date) - new Date(b.date)).map(exp => `<tr><td class="py-1">${formatDate(exp.date)}</td><td class="py-1">${exp.description} ${exp.store ? `(${exp.store})` : ''}</td><td class="py-1 text-right">${formatCurrency(exp.value)}</td></tr>`).join('')}</tbody></table><div class="border-t border-dashed border-gray-400 mt-2 pt-2 text-right"><p><strong>TOTAL GASTOS:</strong> ${formatCurrency(totalExpenses)}</p><p class="font-bold ${remainingBalance >= 0 ? 'text-green-600' : 'text-red-600'}"><strong>SALDO RESTANTE:</strong> ${formatCurrency(remainingBalance)}</p></div>`;
+                const faturaText = member.closingDay ? `FATURA (FECHAMENTO DIA ${member.closingDay}):` : 'MÊS/ANO:';
+                
+                reportContent.innerHTML = `<div class="text-center mb-4"><h3 class="text-lg font-bold">ANDERSON YOSHI CONTABILIDADE</h3><p class="text-sm">RELATÓRIO DE GASTOS PESSOAIS</p></div><div class="border-t border-b border-dashed border-gray-400 my-2 py-2 text-sm"><p><strong>NOME:</strong> ${member.name.toUpperCase()}</p><p><strong>${faturaText}</strong> ${String(month).padStart(2, '0')}/${year}</p><p><strong>SALÁRIO:</strong> ${formatCurrency(member.salary)}</p></div><table class="w-full text-sm my-2"><thead><tr class="border-b border-dashed border-gray-400"><th class="text-left py-1">DATA</th><th class="text-left py-1">DESCRIÇÃO</th><th class="text-right py-1">VALOR</th></tr></thead><tbody>${expenses.sort((a,b) => new Date(a.date) - new Date(b.date)).map(exp => `<tr><td class="py-1">${formatDate(exp.date)}</td><td class="py-1">${exp.description} ${exp.store ? `(${exp.store})` : ''}</td><td class="py-1 text-right">${formatCurrency(exp.value)}</td></tr>`).join('')}</tbody></table><div class="border-t border-dashed border-gray-400 mt-2 pt-2 text-right"><p><strong>TOTAL GASTOS:</strong> ${formatCurrency(totalExpenses)}</p><p class="font-bold ${remainingBalance >= 0 ? 'text-green-600' : 'text-red-600'}"><strong>SALDO RESTANTE:</strong> ${formatCurrency(remainingBalance)}</p></div>`;
                 printPdfBtn.onclick = () => exportReportToPDF(member, month, year, expenses, totalExpenses, remainingBalance);
                 showModal(reportModal);
             }
@@ -542,7 +582,11 @@
                 const doc = new jsPDF();
                 const tableData = expenses.sort((a,b) => new Date(a.date) - new Date(b.date)).map(e => [formatDate(e.date), `${e.description} ${e.store ? `(${e.store})` : ''}`, { content: formatCurrency(e.value), styles: { halign: 'right' } }]);
                 doc.setFontSize(16); doc.text("Relatório de Gastos Pessoais", 105, 20, { align: 'center' });
-                doc.setFontSize(10); doc.text(`NOME: ${member.name.toUpperCase()}`, 14, 35); doc.text(`MÊS/ANO: ${String(month).padStart(2, '0')}/${year}`, 14, 42); doc.text(`SALÁRIO: ${formatCurrency(member.salary)}`, 14, 49);
+                doc.setFontSize(10); 
+                doc.text(`NOME: ${member.name.toUpperCase()}`, 14, 35);
+                const faturaText = member.closingDay ? `FATURA (Fechamento dia ${member.closingDay}): ${String(month).padStart(2, '0')}/${year}` : `MÊS/ANO: ${String(month).padStart(2, '0')}/${year}`;
+                doc.text(faturaText, 14, 42); 
+                doc.text(`SALÁRIO: ${formatCurrency(member.salary)}`, 14, 49);
                 doc.autoTable({ startY: 55, head: [['Data', 'Descrição', 'Valor (R$)']], body: tableData, theme: 'striped', headStyles: { fillColor: [79, 70, 229] } });
                 const finalY = doc.lastAutoTable.finalY;
                 doc.setFontSize(12); doc.text(`Total de Gastos: ${formatCurrency(totalExpenses)}`, 195, finalY + 10, { align: 'right' });
