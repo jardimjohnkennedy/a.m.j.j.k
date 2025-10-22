@@ -253,21 +253,32 @@
             
             // --- UI RENDERING ---
             function populateDateFilters() {
+                const currentDate = new Date();
+                const currentMonth = currentDate.getMonth() + 1; // 1-12
+                const currentYear = currentDate.getFullYear();
+
                 const months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
-                filterMonthSelect.innerHTML = '<option value="all" selected>Todos os Meses</option>' + months.map((month, index) => `<option value="${index + 1}">${month}</option>`).join('');
+                filterMonthSelect.innerHTML = '<option value="all">Todos os Meses</option>' + 
+                    months.map((month, index) => {
+                        const monthValue = index + 1;
+                        const isSelected = monthValue === currentMonth ? 'selected' : '';
+                        return `<option value="${monthValue}" ${isSelected}>${month}</option>`;
+                    }).join('');
                 
-                const yearsInData = [...new Set(expensesData.map(e => e.date ? new Date(e.date).getUTCFullYear() : null).filter(y => y))].sort((a,b) => b-a);
-                let yearOptions = '<option value="all" selected>Todos os Anos</option>';
-                if (yearsInData.length === 0) {
-                    const currentYear = new Date().getFullYear();
-                    for (let i = currentYear; i >= currentYear - 5; i--) {
-                        yearOptions += `<option value="${i}">${i}</option>`;
-                    }
-                } else {
-                    yearsInData.forEach(year => {
-                        yearOptions += `<option value="${year}">${year}</option>`;
-                    })
+                const yearsInData = [...new Set(expensesData.map(e => e.date ? new Date(e.date).getUTCFullYear() : null).filter(y => y))];
+                if (!yearsInData.includes(currentYear)) {
+                    yearsInData.push(currentYear);
                 }
+                if (yearsInData.length === 0) {
+                    yearsInData.push(currentYear);
+                }
+                yearsInData.sort((a, b) => b - a);
+
+                let yearOptions = '<option value="all">Todos os Anos</option>';
+                yearsInData.forEach(year => {
+                    const isSelected = year === currentYear ? 'selected' : '';
+                    yearOptions += `<option value="${year}" ${isSelected}>${year}</option>`;
+                });
                 filterYearSelect.innerHTML = yearOptions;
             }
 
@@ -584,5 +595,4 @@
     </script>
 </body>
 </html>
-
 
