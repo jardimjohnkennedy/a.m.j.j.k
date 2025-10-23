@@ -5,11 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A.M.J.J.K - Associação de Moradores do Jardim John Kennedy</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         body {
-            font-family: 'Inter', sans-serif; margin: 0; padding: 0; background-color: black;
-            background-image: url('https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/background%20.png');
-            background-size: cover; background-repeat: no-repeat; background-position: center; background-attachment: fixed; overflow-y: auto;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8; /* Fundo claro do novo layout */
+            overflow-y: auto;
         }
         .splash-screen {
             display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;
@@ -22,37 +28,34 @@
         .image-container { width: 150px; height: 150px; position: relative; }
         .blinking-logo { width: 100%; height: 100%; object-fit: contain; position: absolute; top: 0; left: 0; }
         .blinking-logo.hidden { display: none; }
-        .main-content { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.5rem; min-height: 100vh; max-width: 90%; margin-left: auto; margin-right: auto; display: none; }
-        @media (min-width: 768px) { .main-content { max-width: 65rem; } }
-        .main-content.visible { display: flex; }
-        .btn-base { @apply flex flex-col items-center justify-center font-bold py-10 px-10 rounded-full shadow-xl transition-transform transform hover:scale-110 active:scale-95 text-white; }
-        .section-container { background-color: rgba(0, 0, 0, 0.6); color: white; padding: 1rem; border-radius: 0.5rem; }
+        
+        /* Ocultar scrollbars */
         .overflow-y-auto::-webkit-scrollbar, .overflow-x-auto::-webkit-scrollbar { display: none; }
         .overflow-y-auto, .overflow-x-auto { -ms-overflow-style: none; scrollbar-width: none; }
-        .whatsapp-widget { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; align-items: center; text-align: center; z-index: 40; }
-        .whatsapp-btn { background-color: #25D366; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); transition: transform 0.3s; }
-        .whatsapp-btn:hover { transform: scale(1.1); }
-        .whatsapp-text { margin-top: 4px; font-size: 0.75rem; color: white; }
-        .android-widget { position: fixed; bottom: 20px; left: 20px; display: flex; flex-direction: column; align-items: center; text-align: center; z-index: 40; }
-        .android-btn { background-color: #48C774; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); transition: transform 0.3s; }
-        .android-btn:hover { transform: scale(1.1); }
-        .android-text { margin-top: 4px; font-size: 0.75rem; color: white; }
-        .back-btn-container { position: absolute; top: 1rem; left: 1rem; z-index: 10; }
+        
+        /* Estilos dos widgets removidos */
+        
+        .bg-light-blue {
+            background-color: #e0f4ff; 
+        }
+
+        /* Estilo para os botões do menu */
+        .menu-button {
+            @apply text-lg font-bold text-gray-800 hover:text-blue-600 transition-colors bg-transparent border-none cursor-pointer p-2;
+        }
+
+        /* Botão de Voltar padrão para overlays */
+        .back-button {
+            @apply mb-8 inline-block bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-6 rounded-lg transition-colors;
+        }
+
+        /* Botão de "Ver Todos" */
+        .see-all-button {
+            @apply mt-8 inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors;
+        }
     </style>
 </head>
-<body>
-    <div class="whatsapp-widget">
-        <a href="https://wa.me/554399597429" target="_blank" class="whatsapp-btn">
-            <img src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/logo_whats.png" alt="WhatsApp Icon" class="w-8 h-8 object-contain">
-        </a>
-        <span class="whatsapp-text">Contato</span>
-    </div>
-    <div class="android-widget">
-        <a href="https://drive.google.com/file/d/1qBB8JcnsnT99cPWLvD-GVgq8BrycJBP_/view" target="_blank" class="android-btn">
-            <img src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/logo_app.png" alt="App Icon" class="w-11 h-11 object-contain">
-        </a>
-        <span class="android-text">APP Android</span>
-    </div>
+<body class="text-gray-800">
 
     <div id="splashScreen" class="splash-screen">
         <div class="image-container">
@@ -61,55 +64,176 @@
         </div>
     </div>
 
-    <div id="mainContent" class="main-content min-h-screen flex-grow mx-auto px-2 overflow-y-auto">
-        <header class="w-full text-white text-center">
-            <img src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/logo.png" alt="Brasão da A.M.J.J.K" class="w-full object-cover mt-0">
+    <div id="mainContent" class="hidden">
+        
+        <header class="bg-light-blue py-20 px-6 text-center">
+            <div class="max-w-4xl mx-auto">
+                <img src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/logo.png" alt="Brasão da A.M.J.J.K" class="w-full max-w-lg mx-auto mb-8 object-cover">
+                
+                <nav class="flex flex-wrap justify-center gap-4 md:gap-8 mt-8">
+                    <button onclick="showOverlay('newsOverlay')" class="menu-button">Notícias</button>
+                    <button onclick="showOverlay('agendaOverlay')" class="menu-button">Agenda e Eventos</button>
+                    <button onclick="showOverlay('archiveOverlay')" class="menu-button">Acervo Digital</button>
+                    <button onclick="showOverlay('utilitiesOverlay')" class="menu-button">Utilidades</button>
+                </nav>
+            </div>
         </header>
 
-        <main class="w-full p-6 mt-auto" id="mainSection">
-            <div id="menuButtons" class="flex flex-col items-end w-full">
-                <button id="mainMenuBtn" onclick="toggleMenu()" class="btn-base bg-transparent hover:bg-gray-800 text-white font-bold rounded-full text-sm md:text-xl">
-                    MENU
-                </button>
+        <section class="py-16 px-6 bg-white">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="bg-gray-100 p-8 rounded-lg shadow-lg">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Nossa História</h2>
+                    <blockquote class="text-2xl font-semibold text-gray-700 italic border-l-4 border-blue-500 pl-6">
+                        "O Jardim John Kennedy se destaca como um dos bairros mais antigos e tradicionais de Ibiporã, no Paraná."
+                    </blockquote>
+                </div>
+                <div class="text-gray-700 space-y-4">
+                    <p>Com uma história rica e uma comunidade engajada, o bairro representa a união perfeita entre o desenvolvimento histórico do município e a contínua busca por qualidade de vida para seus moradores.</p>
+                    <p>Acompanhando o crescimento de Ibiporã, o bairro tem sido palco de constantes melhorias. Olhando para o futuro, em outubro de 2025, o bairro se prepara para receber um novo e moderno complexo de lazer, com a construção de uma quadra poliesportiva, playground e pista de caminhada.</p>
+                </div>
             </div>
-            
-            <div id="navButtons" class="flex flex-col items-end space-y-4 w-full mt-5 hidden">
-                <button onclick="showSection('fullNews')" class="btn-base bg-transparent hover:bg-gray-800 text-white font-bold">NOTICIAS</button>
-                <button onclick="showSection('board')" class="btn-base bg-transparent hover:bg-gray-800 text-white font-bold">DIRETORIA</button>
-                <button onclick="showSection('history')" class="btn-base bg-transparent hover:bg-gray-800 text-white font-bold">HISTÓRIA</button>
-                <button onclick="showSection('social')" class="btn-base bg-transparent hover:bg-gray-800 text-white font-bold">REDES SOCIAIS</button>
-                <button onclick="showSection('utilities')" class="btn-base bg-transparent hover:bg-gray-800 text-white font-bold">UTILIDADES</button>
-                <button onclick="showSection('archive')" class="btn-base bg-transparent hover:bg-gray-800 text-white font-bold">ACERVO</button>
+        </section>
+
+        <section class="py-16 px-6 bg-light-blue">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+                
+                <div>
+                    <h2 class="text-4xl font-black text-gray-900 mb-6">Agenda e Eventos</h2>
+                    <p class="text-lg text-gray-700 mb-8">Fique por dentro do que acontece no bairro.</p>
+                    
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Próxima Agenda (Resumo)</h3>
+                    <div id="upcomingGames" class="space-y-4 mb-8">
+                        </div>
+                    
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Eventos Recentes (Resumo)</h3>
+                    <div id="recentResults" class="space-y-4">
+                        </div>
+                    <button onclick="showOverlay('agendaOverlay')" class="see-all-button">Ver Agenda Completa</button>
+                </div>
+                
+                <div>
+                    <h2 class="text-4xl font-black text-gray-900 mb-6">Últimas Notícias (Resumo)</h2>
+                    <div id="fullNews" class="space-y-6">
+                        </div>
+                    <button onclick="showOverlay('newsOverlay')" class="see-all-button">Ver Todas as Notícias</button>
+                </div>
             </div>
-            
-            <div id="sectionsContainer" class="mt-8 p-4 rounded-lg shadow-inner section-container overflow-y-auto w-full h-full hidden"></div>
-            
-            <div id="newsSection" class="mt-8 p-4 rounded-lg shadow-inner section-container overflow-y-auto w-full h-full">
-                <div class="space-y-6 w-full" id="latestNews"></div>
-                <h2 class="text-2xl font-bold mt-8 mb-4 text-center">Agenda</h2>
-                <div id="upcomingGames" class="flex overflow-x-auto space-x-4 pb-4"></div>
-                <h2 class="text-2xl font-bold mt-8 mb-4 text-center">Eventos</h2>
-                <div id="recentResults" class="flex overflow-x-auto space-x-4 pb-4"></div>
+        </section>
+
+        <section class="py-16 px-6 bg-white text-center">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-4xl font-black text-gray-900 mb-4">Nossa Diretoria</h2>
+                <p class="text-lg text-gray-700 mb-12 max-w-2xl mx-auto">Conheça as pessoas que representam e trabalham pela nossa comunidade.</p>
+                
+                <div id="boardContainer" class="flex overflow-x-auto gap-8 pb-4">
+                    </div>
             </div>
-            
-            <div id="fullNewsSection" class="mt-8 p-4 rounded-lg shadow-inner section-container overflow-y-auto w-full h-full hidden">
-                <h2 class="text-xl font-bold mb-4 text-center mt-5">Notícias Completas</h2>
-                <div class="space-y-6 w-full" id="fullNews"></div>
+        </section>
+
+        <section class="py-20 px-6 bg-gray-800 text-white">
+            <div class="max-w-4xl mx-auto text-center">
+                <blockquote class="text-3xl md:text-4xl font-semibold italic">
+                    "A força da comunidade é personificada por sua atuante Associação de Moradores, que historicamente tem sido a voz da população na busca por melhorias."
+                </blockquote>
             </div>
-        </main>
+        </section>
         
-        <footer class="w-full text-white p-6 text-center mt-auto">
-            <div class="space-y-2 text-sm">
-                <p><strong>Para informação, reclamação ou denúncia, entrar em contato no nosso WhatsApp.</strong> </p>
-                <p><strong>By:</strong> A.Yoshi</p>
+        <section class="py-16 px-6 bg-white">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-4xl font-black text-gray-900 mb-12 text-center">Links Úteis</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <div class="border border-gray-200 rounded-lg p-8 shadow-lg flex flex-col">
+                        <h3 class="text-2xl font-bold mb-4">Redes Sociais</h3>
+                        <p class="text-gray-700 mb-6 flex-grow">Acompanhe nossas atualizações e participe das conversas.</p>
+                        <a href="https://www.instagram.com/a.m.j_johnkennedy/?__pwa=1#" target="_blank" class="block bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-4 rounded-lg text-center transition-colors">Instagram</a>
+                        <a href="#" target="_blank" class="mt-4 block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg text-center transition-colors">Facebook</a>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg p-8 shadow-lg flex flex-col">
+                        <h3 class="text-2xl font-bold mb-4">Acervo Digital</h3>
+                        <p class="text-gray-700 mb-6 flex-grow">Veja fotos, vídeos e documentos históricos do nosso bairro.</p>
+                        <div id="archiveContainer" class="space-y-4"></div>
+                        <button onclick="showOverlay('archiveOverlay')" class="mt-4 block w-full bg-gray-700 hover:bg-gray-800 text-white font-bold py-3 px-4 rounded-lg text-center transition-colors">Abrir Acervo</button>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg p-8 shadow-lg flex flex-col">
+                        <h3 class="text-2xl font-bold mb-4">Utilidades</h3>
+                        <p class="text-gray-700 mb-6 flex-grow">Acesse serviços e informações importantes para o dia a dia.</p>
+                        <div id="utilitiesContainer" class="space-y-2"></div>
+                        <button onclick="showOverlay('utilitiesOverlay')" class="mt-4 block w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-lg text-center transition-colors">Ver Todas</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="bg-gray-900 text-white py-16 px-6">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-3xl font-bold mb-4">Entre em Contato</h3>
+                    <p class="text-gray-400">Para informação, reclamação ou denúncia, entre em contato no nosso WhatsApp.</p>
+                    <a href="https://wa.me/554399597429" target="_blank" class="mt-6 inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                        Abrir WhatsApp
+                    </a>
+                </div>
+                <div>
+                    <h3 class="text-3xl font-bold mb-4">Localização</h3>
+                    <p class="text-gray-400 mb-2">Jardim John Kennedy</p>
+                    <p class="text-gray-400 mb-6">Ibiporã - PR, Brasil</p>
+                    <p class="text-sm text-gray-500">Desenvolvido por: A.Yoshi</p>
+                </div>
             </div>
         </footer>
+    </div>
+
+
+    <div id="newsOverlay" class="hidden min-h-screen bg-light-blue p-6 md:p-12">
+        <button onclick="hideOverlays()" class="back-button">&larr; Voltar</button>
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl font-black text-gray-900 mb-8 text-center">Todas as Notícias</h2>
+            <div id="newsOverlayContainer" class="space-y-6">
+                </div>
+        </div>
+    </div>
+
+    <div id="agendaOverlay" class="hidden min-h-screen bg-white p-6 md:p-12">
+        <button onclick="hideOverlays()" class="back-button">&larr; Voltar</button>
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl font-black text-gray-900 mb-8 text-center">Agenda e Eventos</h2>
+            
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Próxima Agenda</h3>
+            <div id="agendaOverlayContainer" class="space-y-4 mb-8">
+                </div>
+            
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Eventos Recentes</h3>
+            <div id="resultsOverlayContainer" class="space-y-4">
+                </div>
+        </div>
+    </div>
+
+    <div id="archiveOverlay" class="hidden min-h-screen bg-white p-6 md:p-12">
+        <button onclick="hideOverlays()" class="back-button">&larr; Voltar</button>
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl font-black text-gray-900 mb-8 text-center">Acervo Digital</h2>
+            <div id="archiveOverlayContainer" class="space-y-4">
+                </div>
+        </div>
+    </div>
+
+    <div id="utilitiesOverlay" class="hidden min-h-screen bg-light-blue p-6 md:p-12">
+        <button onclick="hideOverlays()" class="back-button">&larr; Voltar</button>
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl font-black text-gray-900 mb-8 text-center">Utilidades</h2>
+            <div id="utilitiesOverlayContainer" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                </div>
+        </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
+        // Configuração do Firebase (mantida)
         const firebaseConfig = {
             apiKey: "AIzaSyD1D5gRg9bkkeyVcJeizFPb24fnASueVvo",
             authDomain: "amjjk-d8656.firebaseapp.com",
@@ -122,11 +246,32 @@
 
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
-        
-        let currentNewsIndex = 0;
-        let newsData = [];
-        let newsInterval;
 
+        // --- LÓGICA DE NAVEGAÇÃO (NOVA) ---
+        const mainContent = document.getElementById('mainContent');
+        const allOverlays = document.querySelectorAll('#newsOverlay, #agendaOverlay, #archiveOverlay, #utilitiesOverlay');
+
+        window.showOverlay = (overlayId) => {
+            mainContent.classList.add('hidden');
+            allOverlays.forEach(overlay => {
+                if (overlay.id === overlayId) {
+                    overlay.classList.remove('hidden');
+                } else {
+                    overlay.classList.add('hidden');
+                }
+            });
+            window.scrollTo(0, 0); // Rola para o topo da nova tela
+        }
+
+        window.hideOverlays = () => {
+            allOverlays.forEach(overlay => overlay.classList.add('hidden'));
+            mainContent.classList.remove('hidden');
+            window.scrollTo(0, 0); // Rola para o topo da página principal
+        }
+        // --- FIM DA LÓGICA DE NAVEGAÇÃO ---
+
+
+        // Função utilitária (mantida)
         function formatDateTime(isoString) {
             if (!isoString) return '';
             const date = new Date(isoString);
@@ -137,185 +282,250 @@
             return `${day}/${month} - ${hours}:${minutes}`;
         }
 
-        const archiveFolders = [ { name: 'FOTOS E VIDEOS', driveLink: 'https://drive.google.com/drive/folders/1MPieySZltQ69euP81L9o2V08wlC_4JQu?usp=drive_link' }, { name: 'DOCUMENTOS', driveLink: 'https://drive.google.com/drive/folders/1BNs1TjGhXATk8STdXLheeV3UIsTzaAkE?usp=drive_link' }];
-        const HISTORY_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">História da Associação</h2><img src="https://www.ibipora.pr.gov.br/uploads/noticia/c2fbc36fa981312dd851d4c9f696ef28.jpg" alt="História" class="w-full h-auto rounded-lg mb-4"><div class="space-y-4 overflow-y-auto w-full h-full"><p class="text-gray-200"><p>O Jardim John Kennedy se destaca como um dos bairros mais antigos e tradicionais de Ibiporã, no Paraná. Com uma história rica e uma comunidade engajada, o bairro representa a união perfeita entre o desenvolvimento histórico do município e a contínua busca por qualidade de vida para seus moradores.<p>
+        // --- FUNÇÕES DE RENDERIZAÇÃO ---
 
-<p>**Raízes Históricas**<p>
-
-<p>As origens do bairro remontam, pelo menos, à década de 1970. Já consolidado como uma comunidade em crescimento, um marco importante de sua história inicial foi a inauguração de um poço artesiano em novembro de 1979, na então chamada "Vila Kennedy". Este evento demonstra a importância que o bairro já possuía naquela época, sendo alvo de investimentos em infraestrutura para atender sua crescente população.<p>
-
-<p> **A Força da Comunidade: A Associação de Moradores**<p>
-
-<p>O forte senso de comunidade do Jardim John Kennedy é personificado por sua atuante Associação de Moradores, que historicamente tem sido a voz da população na busca por melhorias e na organização de eventos locais. Embora os registros do primeiro presidente não sejam facilmente acessíveis, a liderança da associação tem sido fundamental para o progresso do bairro.<p>
-
-<p>Ao longo dos anos, a associação foi conduzida por figuras dedicadas que lutaram pelos interesses dos moradores. Entre os líderes que marcaram a história recente, destacam-se:<p>
-
-<p>**Marlene Rosa de Almeida Costa**, eleita presidente em 2012, com um trabalho reconhecido na comunidade.<p>
-<p>**Simone Pinto**, que esteve à frente da associação em 2019, período em que importantes obras de revitalização foram entregues ao bairro.<p>
-<p>**Marcelo Augusto**, que assume a presidência no ano de 2025, dando continuidade ao legado de representatividade e trabalho em prol do Jardim John Kennedy.<p>
-
-<p>**Desenvolvimento e Olhar para o Futuro**<p>
-
-<p>Acompanhando o crescimento de Ibiporã, o bairro tem sido palco de constantes melhorias. Em 2019, passou por uma significativa revitalização, e os investimentos não pararam.<p>
-
-<p>Olhando para o futuro, em outubro de 2025, o bairro se prepara para receber um novo e moderno complexo de lazer, com a construção de uma quadra poliesportiva, playground e pista de caminhada. Essas obras reforçam o compromisso do poder público e da comunidade em tornar o Jardim John Kennedy um lugar cada vez melhor para se viver.<p>
-
-<p>Dessa forma, o Jardim John Kennedy se firma não apenas como um endereço, mas como uma comunidade viva, que valoriza seu passado, fortalece seu presente através da união de seus moradores e investe em um futuro com mais bem-estar e infraestrutura para todos.<p></p></div></div></div>`;
-        const SOCIAL_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Redes Sociais</h2><div class="space-y-4 w-full"><a href="https://www.instagram.com/a.m.j_johnkennedy/?__pwa=1#" target="_blank" class="block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg text-center">Facebook</a><a href="#" target="_blank" class="block bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-4 rounded-lg text-center">Instagram</a><button onclick="showSection('user-login')" class="block w-full bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg text-center">Acesso Restrito</button></div></div></div>`;
-        const ARCHIVE_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Acervo</h2><p class="text-gray-200 text-center mb-4">Selecione uma pasta para ver.</p><div class="space-y-4 overflow-y-auto w-full h-full">${archiveFolders.map(f => `<a href="${f.driveLink}" target="_blank" class="block w-full bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-lg text-center"><h3 class="font-bold">${f.name}</h3></a>`).join('')}</div></div></div>`;
-        const LOGIN_CONTENT = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Acesso Restrito</h2><form onsubmit="handleLogin(event)" class="space-y-4 w-full"><input type="text" id="username" placeholder="Login" class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none"><input type="password" id="password" placeholder="Senha" class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none"><button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg">Entrar</button></form><div id="loginMessage" class="mt-4 text-center"></div></div></div>`;
-        const FULL_NEWS_TEMPLATE = `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Notícias Completas</h2><div class="space-y-6 w-full" id="fullNewsContent"></div></div></div>`;
-        
-        // --- FUNÇÃO DIRETORIA (MODIFICADA) ---
-        async function getBoardContent() {
-            const snapshot = await get(ref(database, 'board'));
-            if (!snapshot.exists()) return '<p>Nenhum membro da diretoria encontrado.</p>';
-            const roles = ['Presidente', 'Vice-presidente', '1º Secretário', '2º Secretário', 'Tesoureiro', 'Fiscais'];
-            let contentHTML = roles.map(role => {
-                const membersInRole = Object.values(snapshot.val()).filter(p => p.role === role);
-                if (membersInRole.length === 0) return '';
-                
-                const membersHTML = membersInRole.map(p => {
-                    const memberContent = `<img src="${p.image}" alt="${p.name}" class="w-11 h-11 rounded-full mr-2 object-cover">${p.name}`;
-                    
-                    // Se houver link de instagram, o item se torna um link clicável
+        // Renderiza a Diretoria (horizontal)
+        async function renderBoard() {
+            const container = document.getElementById('boardContainer');
+            if (!container) return;
+            
+            try {
+                const snapshot = await get(ref(database, 'board'));
+                if (!snapshot.exists()) {
+                    container.innerHTML = '<p>Nenhum membro da diretoria encontrado.</p>';
+                    return;
+                }
+                const members = Object.values(snapshot.val());
+                container.innerHTML = members.map(p => {
+                    const memberCardContent = `
+                        <img src="${p.image}" alt="${p.name}" class="w-32 h-32 rounded-full object-cover mb-4 shadow-lg border-4 border-white">
+                        <h4 class="text-lg font-bold text-gray-900">${p.name}</h4>
+                        <p class="text-gray-600">${p.role}</p>
+                    `;
+                    const cardClasses = "flex flex-col items-center text-center flex-shrink-0 w-48";
                     if (p.instagram && p.instagram.trim() !== '') {
-                        return `<a href="${p.instagram}" target="_blank" class="flex items-center bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-lg transition-colors">${memberContent}</a>`;
+                        return `<a href="${p.instagram}" target="_blank" class="${cardClasses} transition-transform transform hover:scale-105">${memberCardContent}</a>`;
                     } else {
-                        // Senão, é apenas um display de informação
-                        return `<div class="flex items-center bg-gray-200 text-gray-800 font-bold py-3 px-4 rounded-lg">${memberContent}</div>`;
+                        return `<div class="${cardClasses}">${memberCardContent}</div>`;
                     }
                 }).join('');
 
-                return `<h3 class="text-lg font-bold mt-4">${role}</h3>` + membersHTML;
+            } catch (error) {
+                console.error("Erro ao carregar diretoria:", error);
+                container.innerHTML = '<p class="text-red-500">Falha ao carregar diretoria.</p>';
+            }
+        }
+
+        // Renderiza Notícias (com modo de resumo)
+        function renderNews(containerId, newsArray, isSummary = false) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            if (newsArray.length === 0) {
+                 container.innerHTML = '<p class="text-gray-600">Nenhuma notícia recente.</p>';
+                 return;
+            }
+
+            container.innerHTML = newsArray.map(news => {
+                if (isSummary) {
+                    // Layout de Resumo (só imagem e título)
+                    return `
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                            <img src="${news.image}" alt="Notícia" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <h3 class="text-lg font-bold text-gray-900 truncate">${news.title}</h3>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // Layout Completo (como estava antes)
+                    return `
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <img src="${news.image}" alt="Notícia" class="w-full h-48 object-cover rounded-lg mb-4">
+                            <span class="text-xs text-gray-500">${news.date.split('-').reverse().join('/')}</span>
+                            <h3 class="text-xl font-bold mb-2 text-gray-900">${news.title}</h3>
+                            <p class="text-gray-700">${news.text}</p>
+                        </div>
+                    `;
+                }
             }).join('');
-            
-            return `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Diretoria</h2><div class="space-y-4 overflow-y-auto w-full h-full">${contentHTML}</div></div></div>`;
-        }
-
-        async function getUtilitiesContent() {
-            const snapshot = await get(ref(database, 'utilities'));
-            if (!snapshot.exists()) return '<p>Nenhuma utilidade encontrada.</p>';
-            let contentHTML = Object.values(snapshot.val()).map(s => `<div class="mt-6"><img src="${s.image}" alt="${s.name}" class="w-32 h-32 rounded-lg mb-4 mx-auto object-contain"><div class="bg-gray-800 p-4 rounded-lg shadow-md w-full"><h3 class="text-lg font-bold mb-2">${s.name}</h3><p class="text-white text-sm mb-2"><strong>Descrição:</strong> ${s.description}</p><p class="text-white text-sm"><strong>Endereço:</strong> ${s.address}</p><p class="text-white text-sm"><strong>Telefone:</strong> ${s.phone}</p><a href="${s.link}" target="_blank" class="block w-full mt-4 bg-blue-700 hover:bg-blue-900 text-white font-bold py-3 px-4 rounded-lg text-center">Acessar Link</a></div></div>`).join('');
-            return `<div class="relative w-full p-4"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><div class="flex flex-col items-center pt-10"><h2 class="text-xl font-bold mb-4 text-center">Utilidades</h2>${contentHTML}</div></div>`;
         }
         
-        window.showSection = async (section) => {
-            const sectionsContainer = document.getElementById('sectionsContainer');
-            document.getElementById('navButtons').classList.add('hidden');
-            sectionsContainer.innerHTML = '<p class="text-center">Carregando...</p>';
-            sectionsContainer.classList.remove('hidden');
-            document.getElementById('newsSection').classList.add('hidden');
-            document.getElementById('fullNewsSection').classList.add('hidden');
+        // Renderiza Agenda (para um container específico)
+        function renderGames(containerId, games) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
 
-            let contentHTML = '';
-            switch(section) {
-                case 'board': contentHTML = await getBoardContent(); break;
-                case 'history': contentHTML = HISTORY_CONTENT; break;
-                case 'social': contentHTML = SOCIAL_CONTENT; break;
-                case 'utilities': contentHTML = await getUtilitiesContent(); break;
-                case 'archive': contentHTML = ARCHIVE_CONTENT; break;
-                case 'user-login': contentHTML = LOGIN_CONTENT; break;
-                case 'fullNews':
-                    sectionsContainer.innerHTML = FULL_NEWS_TEMPLATE;
-                    renderNews('fullNewsContent', newsData);
+            if (games.length === 0) {
+                 container.innerHTML = '<p class="text-gray-600">Nenhum item na agenda.</p>';
+                 return;
+            }
+
+            container.innerHTML = games.map(game => `
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <p class="text-sm font-semibold text-blue-600">${formatDateTime(game.date)}</p>
+                    <h3 class="text-lg font-bold mt-1 mb-2 text-gray-900">${game.teams}</h3>
+                    <p class="text-sm text-gray-600 mb-3">${game.location}</p>
+                    <a href="${game.mapLink}" target="_blank" class="inline-block bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors">Ver Local</a>
+                </div>
+            `).join('');
+        }
+
+        // Renderiza Eventos (para um container específico)
+        function renderResults(containerId, results) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+             if (results.length === 0) {
+                 container.innerHTML = '<p class="text-gray-600">Nenhum evento recente.</p>';
+                 return;
+            }
+
+            container.innerHTML = results.map(result => `
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <p class="text-sm font-semibold text-blue-600">${formatDateTime(result.date)}</p>
+                    <h3 class="text-xl font-bold mt-1 mb-2 text-gray-900">${result.match}</h3>
+                    <p class="text-sm text-gray-600 mb-3">${result.location}</p>
+                    <a href="${result.mapLink}" target="_blank" class="inline-block bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors">Ver Local</a>
+                </div>
+            `).join('');
+        }
+
+        // Renderiza Acervo (em ambos os containers)
+        function renderArchive() {
+            const archiveData = [
+                { name: 'Fotos e Vídeos', url: 'https://drive.google.com/drive/folders/1MPieySZltQ69euP81L9o2V08wlC_4JQu?usp=drive_link' },
+                { name: 'Documentos', url: 'https://drive.google.com/drive/folders/1BNs1TjGhXATk8STdXLheeV3UIsTzaAkE?usp=drive_link' }
+            ];
+
+            const linkHTML = archiveData.map(link => `
+                <a href="${link.url}" target="_blank" class="block bg-gray-700 hover:bg-gray-800 text-white font-bold py-3 px-4 rounded-lg text-center transition-colors">
+                    ${link.name}
+                </a>
+            `).join('');
+
+            document.getElementById('archiveContainer').innerHTML = linkHTML;
+            document.getElementById('archiveOverlayContainer').innerHTML = linkHTML;
+        }
+
+        // Renderiza Utilidades (em ambos os containers, com layouts diferentes)
+        async function renderUtilities() {
+            const mainContainer = document.getElementById('utilitiesContainer');
+            const overlayContainer = document.getElementById('utilitiesOverlayContainer');
+            if (!mainContainer || !overlayContainer) return;
+
+            try {
+                const snapshot = await get(ref(database, 'utilities'));
+                if (!snapshot.exists()) {
+                    const errorMsg = '<p class="text-sm text-gray-600">Nenhuma utilidade cadastrada.</p>';
+                    mainContainer.innerHTML = errorMsg;
+                    overlayContainer.innerHTML = errorMsg;
                     return;
-            }
-            sectionsContainer.innerHTML = contentHTML;
-        }
-        
-        window.backToNewsScreen = () => {
-            document.getElementById('sectionsContainer').classList.add('hidden');
-            document.getElementById('fullNewsSection').classList.add('hidden');
-            document.getElementById('newsSection').classList.remove('hidden');
-        }
-
-        window.toggleMenu = () => document.getElementById('navButtons').classList.toggle('hidden');
-        
-        window.readMore = (newsId) => {
-            const news = newsData.find(item => item.id === newsId);
-            if (!news) return;
-            document.getElementById('newsSection').classList.add('hidden');
-            document.getElementById('fullNewsSection').classList.remove('hidden');
-            document.getElementById('fullNews').innerHTML = `<div class="bg-gray-800 p-4 rounded-lg shadow-md relative"><div class="back-btn-container"><button onclick="backToNewsScreen()" class="text-white bg-gray-800 hover:bg-gray-700 rounded-full px-4 py-2">← Voltar</button></div><span class="absolute top-2 right-2 text-xs text-gray-400">${news.date.split('-').reverse().join('/')}</span><h3 class="text-xl font-bold mb-2 mt-10">${news.title}</h3><img src="${news.image}" alt="Notícia" class="w-full h-auto rounded-lg mb-2"><p class="text-gray-300 mt-4">${news.text}</p></div>`;
-        }
-        
-        window.handleLogin = (event) => {
-            event.preventDefault();
-            const users = { "ADMIN": { p: "1234", l: "admin.html" } };
-            const u = document.getElementById('username').value.toUpperCase();
-            const p = document.getElementById('password').value;
-            const m = document.getElementById('loginMessage');
-            
-            if (users[u] && users[u].p === p) {
-                m.innerHTML = `<p class="text-green-500 font-bold">Acesso liberado!</p>`;
-                window.location.href = users[u].l;
-            } else {
-                m.innerHTML = '<p class="text-red-500 font-bold">Login ou senha incorretos.</p>';
+                }
+                const utilities = Object.values(snapshot.val());
+                
+                // Popula o card da página principal (só links)
+                mainContainer.innerHTML = utilities.slice(0, 2).map(s => `
+                    <button onclick="showOverlay('utilitiesOverlay')" class="block w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-lg text-center transition-colors text-sm">
+                        ${s.name}
+                    </button>
+                `).join('');
+                
+                // Popula o overlay (cards com detalhes)
+                overlayContainer.innerHTML = utilities.map(s => `
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">${s.name}</h3>
+                        <p class="text-gray-700 mb-2"><strong>Descrição:</strong> ${s.description}</p>
+                        <p class="text-gray-700 mb-2"><strong>Endereço:</strong> ${s.address}</p>
+                        <p class="text-gray-700 mb-4"><strong>Telefone:</strong> ${s.phone}</p>
+                        <a href="${s.link}" target="_blank" class="mt-auto inline-block bg-gray-700 hover:bg-gray-800 text-white font-bold py-3 px-4 rounded-lg text-center transition-colors">
+                            Acessar Link
+                        </a>
+                    </div>
+                `).join('');
+            } catch (error) {
+                 console.error("Erro ao carregar utilidades:", error);
+                 const errorMsg = '<p class="text-red-500 text-sm">Falha ao carregar.</p>';
+                 mainContainer.innerHTML = errorMsg;
+                 overlayContainer.innerHTML = errorMsg;
             }
         }
 
-        function renderNews(containerId, newsArray) {
-            document.getElementById(containerId).innerHTML = newsArray.map(news => `<div class="bg-gray-800 p-4 rounded-lg shadow-md relative"><span class="absolute top-2 right-2 text-xs text-gray-400">${news.date.split('-').reverse().join('/')}</span><h3 class="text-lg font-bold mb-2">${news.title}</h3><img src="${news.image}" alt="Notícia" class="w-full h-auto rounded-lg mb-2"><p class="text-gray-300">${news.text}</p></div>`).join('');
-        }
 
-        function renderSingleNews(newsToCycle) {
-            const container = document.getElementById('latestNews');
-            if (!newsToCycle || newsToCycle.length === 0) {
-                container.innerHTML = '<p class="text-center text-gray-400">Nenhuma notícia recente.</p>'; return;
-            }
-            const news = newsToCycle[currentNewsIndex];
-            container.innerHTML = `<div class="bg-gray-800 p-4 rounded-lg shadow-md relative"><span class="absolute top-2 right-2 text-xs text-gray-400">${news.date.split('-').reverse().join('/')}</span><h3 class="text-lg font-bold mb-2">${news.title}</h3><img src="${news.image}" alt="Notícia" class="w-full h-auto rounded-lg mb-2"><button onclick="readMore('${news.id}')" class="mt-4 bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg block mx-auto">LER MAIS</button></div>`;
-            currentNewsIndex = (currentNewsIndex + 1) % newsToCycle.length;
-        }
-        
+        // --- FUNÇÃO PRINCIPAL DE CARREGAMENTO (MODIFICADA) ---
         async function loadInitialData() {
             try {
-                const [newsSnap, gamesSnap, resultsSnap] = await Promise.all([ get(ref(database, 'news')), get(ref(database, 'upcomingGames')), get(ref(database, 'recentResults')) ]);
+                // Carrega dados em paralelo
+                const [newsSnap, gamesSnap, resultsSnap] = await Promise.all([ 
+                    get(ref(database, 'news')), 
+                    get(ref(database, 'upcomingGames')), 
+                    get(ref(database, 'recentResults')) 
+                ]);
 
+                // Renderiza Diretoria (função separada)
+                renderBoard();
+                
+                // Renderiza Acervo (função separada)
+                renderArchive();
+
+                // Renderiza Utilidades (função separada)
+                renderUtilities();
+
+                // Processa Notícias
                 if (newsSnap.exists()) {
                     const newsResult = newsSnap.val();
-                    newsData = Object.keys(newsResult).map(key => ({ id: key, ...newsResult[key] })).sort((a, b) => new Date(b.date) - new Date(a.date));
-                    if (newsData.length > 0) {
-                        renderSingleNews(newsData);
-                        clearInterval(newsInterval);
-                        newsInterval = setInterval(() => renderSingleNews(newsData), 5000);
-                    }
+                    const newsData = Object.keys(newsResult).map(key => ({ id: key, ...newsResult[key] })).sort((a, b) => new Date(b.date) - new Date(a.date));
+                    renderNews('fullNews', newsData.slice(0, 3), true); // Resumo na Home (isSummary = true)
+                    renderNews('newsOverlayContainer', newsData, false); // Completo no Overlay (isSummary = false)
+                } else {
+                    renderNews('fullNews', [], true);
+                    renderNews('newsOverlayContainer', [], false);
                 }
 
+                // Processa Agenda
                 if (gamesSnap.exists()) {
                     const games = Object.values(gamesSnap.val()).sort((a, b) => new Date(b.date) - new Date(a.date));
-                    document.getElementById('upcomingGames').innerHTML = games.map(game => `<div class="flex-none w-full sm:w-80 bg-gray-800 p-4 rounded-lg shadow-md"><p class="text-sm font-semibold">${formatDateTime(game.date)}</p><h3 class="text-lg font-bold mt-1 mb-2">${game.teams}</h3><p class="text-sm text-gray-400">${game.location}</p><a href="${game.mapLink}" target="_blank" class="block mt-3 bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-3 rounded-lg text-center text-sm">Ver Local</a></div>`).join('');
+                    renderGames('upcomingGames', games.slice(0, 3)); // Resumo na Home
+                    renderGames('agendaOverlayContainer', games); // Completo no Overlay
+                } else {
+                    renderGames('upcomingGames', []);
+                    renderGames('agendaOverlayContainer', []);
                 }
 
+                // Processa Eventos
                 if (resultsSnap.exists()) {
                     const results = Object.values(resultsSnap.val()).sort((a, b) => new Date(b.date) - new Date(a.date));
-                     document.getElementById('recentResults').innerHTML = results.map(result => `<div class="flex-none w-full sm:w-80 bg-gray-800 p-4 rounded-lg shadow-md"><p class="text-sm font-semibold">${formatDateTime(result.date)}</p><h3 class="text-xl font-bold mt-1 mb-2">${result.match}</h3><p class="text-sm text-gray-400">${result.location}</p><a href="${result.mapLink}" target="_blank" class="block mt-3 bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-3 rounded-lg text-center text-sm">Ver Local</a></div>`).join('');
+                    renderResults('recentResults', results.slice(0, 3)); // Resumo na Home
+                    renderResults('resultsOverlayContainer', results); // Completo no Overlay
+                } else {
+                    renderResults('recentResults', []);
+                    renderResults('resultsOverlayContainer', []);
                 }
 
             } catch (error) {
                 console.error("Erro ao carregar dados do Firebase:", error);
-                document.getElementById('latestNews').innerHTML = '<p class="text-center text-red-500">Falha ao carregar dados.</p>';
+                document.getElementById('fullNews').innerHTML = '<p class="text-center text-red-500">Falha ao carregar dados.</p>';
+                document.getElementById('boardContainer').innerHTML = '<p class="text-center text-red-500">Falha ao carregar dados.</p>';
             }
         }
 
+        // --- INICIALIZAÇÃO DA PÁGINA (Mantida) ---
         window.onload = () => {
             const splashScreen = document.getElementById('splashScreen');
-            const mainContent = document.getElementById('mainContent');
             const logo1 = document.getElementById('logo1');
             const logo2 = document.getElementById('logo2');
 
-            setInterval(() => { logo1.classList.toggle('hidden'); logo2.classList.toggle('hidden'); }, 1000);
+            setInterval(() => { 
+                logo1.classList.toggle('hidden'); 
+                logo2.classList.toggle('hidden'); 
+            }, 1000);
 
             setTimeout(() => {
                 splashScreen.classList.add('hidden');
-                mainContent.classList.add('visible');
-                loadInitialData();
+                mainContent.classList.remove('hidden'); // Mostra a página principal
+                loadInitialData(); // Carrega todos os dados
             }, 3000);
         };
     </script>
 </body>
 </html>
-
-
-
