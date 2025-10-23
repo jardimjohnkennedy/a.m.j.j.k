@@ -16,6 +16,8 @@
             padding: 0;
             background-color: #f0f4f8; /* Fundo claro do novo layout */
             overflow-y: auto;
+            -webkit-font-smoothing: antialiased; /* Melhora renderização de fontes */
+            -moz-osx-font-smoothing: grayscale;
         }
         .splash-screen {
             display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;
@@ -33,25 +35,23 @@
         .overflow-y-auto::-webkit-scrollbar, .overflow-x-auto::-webkit-scrollbar { display: none; }
         .overflow-y-auto, .overflow-x-auto { -ms-overflow-style: none; scrollbar-width: none; }
         
-        /* Estilos dos widgets removidos */
-        
         .bg-light-blue {
             background-color: #e0f4ff; 
         }
 
         /* Estilo para os botões do menu */
         .menu-button {
-            @apply text-lg font-bold text-gray-800 hover:text-blue-600 transition-colors bg-transparent border-none cursor-pointer p-2;
+            @apply text-base sm:text-lg font-bold text-gray-800 hover:text-blue-600 transition-colors bg-transparent border-none cursor-pointer p-2;
         }
 
         /* Botão de Voltar padrão para overlays */
         .back-button {
-            @apply mb-8 inline-block bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-6 rounded-lg transition-colors;
+            @apply mb-8 inline-block bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-5 sm:px-6 rounded-lg transition-colors text-sm sm:text-base;
         }
 
         /* Botão de "Ver Todos" */
         .see-all-button {
-            @apply mt-8 inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors;
+            @apply mt-8 inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors text-sm sm:text-base;
         }
     </style>
 </head>
@@ -66,11 +66,11 @@
 
     <div id="mainContent" class="hidden">
         
-        <header class="bg-light-blue py-20 px-6 text-center">
+        <header class="bg-light-blue py-12 sm:py-16 md:py-20 px-6 text-center">
             <div class="max-w-4xl mx-auto">
-                <img src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/logo.png" alt="Brasão da A.M.J.J.K" class="w-full max-w-lg mx-auto mb-8 object-cover">
+                <img src="https://raw.githubusercontent.com/jardimjohnkennedy/amjjk/refs/heads/main/logo.png" alt="Brasão da A.M.J.J.K" class="w-full max-w-sm sm:max-w-md md:max-w-lg mx-auto mb-8 object-cover">
                 
-                <nav class="flex flex-wrap justify-center gap-4 md:gap-8 mt-8">
+                <nav class="flex flex-wrap justify-center gap-2 sm:gap-4 md:gap-8 mt-8">
                     <button onclick="showOverlay('newsOverlay')" class="menu-button">Notícias</button>
                     <button onclick="showOverlay('agendaOverlay')" class="menu-button">Agenda e Eventos</button>
                     <button onclick="showOverlay('archiveOverlay')" class="menu-button">Acervo Digital</button>
@@ -79,40 +79,40 @@
             </div>
         </header>
 
-        <section class="py-16 px-6 bg-white">
-            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div class="bg-gray-100 p-8 rounded-lg shadow-lg">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Nossa História</h2>
-                    <blockquote class="text-2xl font-semibold text-gray-700 italic border-l-4 border-blue-500 pl-6">
+        <section class="py-12 md:py-16 px-6 lg:px-8 bg-white">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div class="bg-gray-100 p-6 sm:p-8 rounded-lg shadow-lg">
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-6">Nossa História</h2>
+                    <blockquote class="text-xl sm:text-2xl font-semibold text-gray-700 italic border-l-4 border-blue-500 pl-4 sm:pl-6">
                         "O Jardim John Kennedy se destaca como um dos bairros mais antigos e tradicionais de Ibiporã, no Paraná."
                     </blockquote>
                 </div>
-                <div class="text-gray-700 space-y-4">
+                <div class="text-gray-700 space-y-4 text-base md:text-lg">
                     <p>Com uma história rica e uma comunidade engajada, o bairro representa a união perfeita entre o desenvolvimento histórico do município e a contínua busca por qualidade de vida para seus moradores.</p>
                     <p>Acompanhando o crescimento de Ibiporã, o bairro tem sido palco de constantes melhorias. Olhando para o futuro, em outubro de 2025, o bairro se prepara para receber um novo e moderno complexo de lazer, com a construção de uma quadra poliesportiva, playground e pista de caminhada.</p>
                 </div>
             </div>
         </section>
 
-        <section class="py-16 px-6 bg-light-blue">
-            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+        <section class="py-12 md:py-16 px-6 lg:px-8 bg-light-blue">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
                 
                 <div>
-                    <h2 class="text-4xl font-black text-gray-900 mb-6">Agenda e Eventos</h2>
+                    <h2 class="text-3xl sm:text-4xl font-black text-gray-900 mb-6">Agenda e Eventos</h2>
                     <p class="text-lg text-gray-700 mb-8">Fique por dentro do que acontece no bairro.</p>
                     
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Próxima Agenda (Resumo)</h3>
+                    <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Próxima Agenda</h3>
                     <div id="upcomingGames" class="space-y-4 mb-8">
                         </div>
                     
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Eventos Recentes (Resumo)</h3>
+                    <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Eventos Recentes</h3>
                     <div id="recentResults" class="space-y-4">
                         </div>
                     <button onclick="showOverlay('agendaOverlay')" class="see-all-button">Ver Agenda Completa</button>
                 </div>
                 
                 <div>
-                    <h2 class="text-4xl font-black text-gray-900 mb-6">Últimas Notícias (Resumo)</h2>
+                    <h2 class="text-3xl sm:text-4xl font-black text-gray-900 mb-6">Últimas Notícias</h2>
                     <div id="fullNews" class="space-y-6">
                         </div>
                     <button onclick="showOverlay('newsOverlay')" class="see-all-button">Ver Todas as Notícias</button>
@@ -120,66 +120,53 @@
             </div>
         </section>
 
-        <section class="py-16 px-6 bg-white text-center">
+        <section class="py-12 md:py-16 px-6 lg:px-8 bg-white text-center">
             <div class="max-w-6xl mx-auto">
-                <h2 class="text-4xl font-black text-gray-900 mb-4">Nossa Diretoria</h2>
+                <h2 class="text-3xl sm:text-4xl font-black text-gray-900 mb-4">Nossa Diretoria</h2>
                 <p class="text-lg text-gray-700 mb-12 max-w-2xl mx-auto">Conheça as pessoas que representam e trabalham pela nossa comunidade.</p>
                 
-                <div id="boardContainer" class="flex overflow-x-auto gap-8 pb-4">
+                <div id="boardContainer" class="flex overflow-x-auto gap-6 sm:gap-8 pb-4 -mx-6 px-6 sm:mx-0 sm:px-0">
                     </div>
             </div>
         </section>
 
-        <section class="py-20 px-6 bg-gray-800 text-white">
+        <section class="py-16 sm:py-20 px-6 bg-gray-800 text-white">
             <div class="max-w-4xl mx-auto text-center">
-                <blockquote class="text-3xl md:text-4xl font-semibold italic">
+                <blockquote class="text-2xl sm:text-3xl lg:text-4xl font-semibold italic">
                     "A força da comunidade é personificada por sua atuante Associação de Moradores, que historicamente tem sido a voz da população na busca por melhorias."
                 </blockquote>
             </div>
         </section>
         
-        <section class="py-16 px-6 bg-white">
+        <section class="py-12 md:py-16 px-6 lg:px-8 bg-white">
             <div class="max-w-6xl mx-auto">
-                <h2 class="text-4xl font-black text-gray-900 mb-12 text-center">Links Úteis</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <h2 class="text-3xl sm:text-4xl font-black text-gray-900 mb-12 text-center">Links Úteis</h2>
+                <div class="flex justify-center">
                     
-                    <div class="border border-gray-200 rounded-lg p-8 shadow-lg flex flex-col">
+                    <div class="border border-gray-200 rounded-lg p-6 sm:p-8 shadow-lg flex flex-col w-full max-w-md">
                         <h3 class="text-2xl font-bold mb-4">Redes Sociais</h3>
-                        <p class="text-gray-700 mb-6 flex-grow">Acompanhe nossas atualizações e participe das conversas.</p>
+                        <p class="text-gray-700 mb-6 flex-grow text-base md:text-lg">Acompanhe nossas atualizações e participe das conversas.</p>
                         <a href="https://www.instagram.com/a.m.j_johnkennedy/?__pwa=1#" target="_blank" class="block bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-4 rounded-lg text-center transition-colors">Instagram</a>
                         <a href="#" target="_blank" class="mt-4 block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg text-center transition-colors">Facebook</a>
                     </div>
                     
-                    <div class="border border-gray-200 rounded-lg p-8 shadow-lg flex flex-col">
-                        <h3 class="text-2xl font-bold mb-4">Acervo Digital</h3>
-                        <p class="text-gray-700 mb-6 flex-grow">Veja fotos, vídeos e documentos históricos do nosso bairro.</p>
-                        <div id="archiveContainer" class="space-y-4"></div>
-                        <button onclick="showOverlay('archiveOverlay')" class="mt-4 block w-full bg-gray-700 hover:bg-gray-800 text-white font-bold py-3 px-4 rounded-lg text-center transition-colors">Abrir Acervo</button>
-                    </div>
-                    
-                    <div class="border border-gray-200 rounded-lg p-8 shadow-lg flex flex-col">
-                        <h3 class="text-2xl font-bold mb-4">Utilidades</h3>
-                        <p class="text-gray-700 mb-6 flex-grow">Acesse serviços e informações importantes para o dia a dia.</p>
-                        <div id="utilitiesContainer" class="space-y-2"></div>
-                        <button onclick="showOverlay('utilitiesOverlay')" class="mt-4 block w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-lg text-center transition-colors">Ver Todas</button>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <footer class="bg-gray-900 text-white py-16 px-6">
-            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        <footer class="bg-gray-900 text-white py-16 px-6 lg:px-8">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-8">
                 <div>
-                    <h3 class="text-3xl font-bold mb-4">Entre em Contato</h3>
-                    <p class="text-gray-400">Para informação, reclamação ou denúncia, entre em contato no nosso WhatsApp.</p>
+                    <h3 class="text-2xl sm:text-3xl font-bold mb-4">Entre em Contato</h3>
+                    <p class="text-gray-400 text-base md:text-lg">Para informação, reclamação ou denúncia, entre em contato no nosso WhatsApp.</p>
                     <a href="https://wa.me/554399597429" target="_blank" class="mt-6 inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition-colors">
                         Abrir WhatsApp
                     </a>
                 </div>
                 <div>
-                    <h3 class="text-3xl font-bold mb-4">Localização</h3>
-                    <p class="text-gray-400 mb-2">Jardim John Kennedy</p>
-                    <p class="text-gray-400 mb-6">Ibiporã - PR, Brasil</p>
+                    <h3 class="text-2xl sm:text-3xl font-bold mb-4">Localização</h3>
+                    <p class="text-gray-400 mb-2 text-base md:text-lg">Jardim John Kennedy</p>
+                    <p class="text-gray-400 mb-6 text-base md:text-lg">Ibiporã - PR, Brasil</p>
                     <p class="text-sm text-gray-500">Desenvolvido por: A.Yoshi</p>
                 </div>
             </div>
@@ -187,43 +174,43 @@
     </div>
 
 
-    <div id="newsOverlay" class="hidden min-h-screen bg-light-blue p-6 md:p-12">
+    <div id="newsOverlay" class="hidden min-h-screen bg-light-blue p-6 md:p-10 lg:p-16">
         <button onclick="hideOverlays()" class="back-button">&larr; Voltar</button>
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-4xl font-black text-gray-900 mb-8 text-center">Todas as Notícias</h2>
+            <h2 class="text-3xl sm:text-4xl font-black text-gray-900 mb-8 text-center">Todas as Notícias</h2>
             <div id="newsOverlayContainer" class="space-y-6">
                 </div>
         </div>
     </div>
 
-    <div id="agendaOverlay" class="hidden min-h-screen bg-white p-6 md:p-12">
+    <div id="agendaOverlay" class="hidden min-h-screen bg-white p-6 md:p-10 lg:p-16">
         <button onclick="hideOverlays()" class="back-button">&larr; Voltar</button>
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-4xl font-black text-gray-900 mb-8 text-center">Agenda e Eventos</h2>
+            <h2 class="text-3xl sm:text-4xl font-black text-gray-900 mb-8 text-center">Agenda e Eventos</h2>
             
-            <h3 class="text-2xl font-bold text-gray-900 mb-4">Próxima Agenda</h3>
+            <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Próxima Agenda</h3>
             <div id="agendaOverlayContainer" class="space-y-4 mb-8">
                 </div>
             
-            <h3 class="text-2xl font-bold text-gray-900 mb-4">Eventos Recentes</h3>
+            <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Eventos Recentes</h3>
             <div id="resultsOverlayContainer" class="space-y-4">
                 </div>
         </div>
     </div>
 
-    <div id="archiveOverlay" class="hidden min-h-screen bg-white p-6 md:p-12">
+    <div id="archiveOverlay" class="hidden min-h-screen bg-white p-6 md:p-10 lg:p-16">
         <button onclick="hideOverlays()" class="back-button">&larr; Voltar</button>
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-4xl font-black text-gray-900 mb-8 text-center">Acervo Digital</h2>
+            <h2 class="text-3xl sm:text-4xl font-black text-gray-900 mb-8 text-center">Acervo Digital</h2>
             <div id="archiveOverlayContainer" class="space-y-4">
                 </div>
         </div>
     </div>
 
-    <div id="utilitiesOverlay" class="hidden min-h-screen bg-light-blue p-6 md:p-12">
+    <div id="utilitiesOverlay" class="hidden min-h-screen bg-light-blue p-6 md:p-10 lg:p-16">
         <button onclick="hideOverlays()" class="back-button">&larr; Voltar</button>
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-4xl font-black text-gray-900 mb-8 text-center">Utilidades</h2>
+            <h2 class="text-3xl sm:text-4xl font-black text-gray-900 mb-8 text-center">Utilidades</h2>
             <div id="utilitiesOverlayContainer" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 </div>
         </div>
@@ -298,11 +285,12 @@
                 const members = Object.values(snapshot.val());
                 container.innerHTML = members.map(p => {
                     const memberCardContent = `
-                        <img src="${p.image}" alt="${p.name}" class="w-32 h-32 rounded-full object-cover mb-4 shadow-lg border-4 border-white">
-                        <h4 class="text-lg font-bold text-gray-900">${p.name}</h4>
-                        <p class="text-gray-600">${p.role}</p>
+                        <img src="${p.image}" alt="${p.name}" class="w-28 h-28 md:w-32 md:h-32 rounded-full object-cover mb-4 shadow-lg border-4 border-white">
+                        <h4 class="text-base md:text-lg font-bold text-gray-900">${p.name}</h4>
+                        <p class="text-sm md:text-base text-gray-600">${p.role}</p>
                     `;
-                    const cardClasses = "flex flex-col items-center text-center flex-shrink-0 w-48";
+                    // Ajuste na largura dos cards para responsividade
+                    const cardClasses = "flex flex-col items-center text-center flex-shrink-0 w-40 sm:w-48";
                     if (p.instagram && p.instagram.trim() !== '') {
                         return `<a href="${p.instagram}" target="_blank" class="${cardClasses} transition-transform transform hover:scale-105">${memberCardContent}</a>`;
                     } else {
@@ -331,20 +319,20 @@
                     // Layout de Resumo (só imagem e título)
                     return `
                         <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                            <img src="${news.image}" alt="Notícia" class="w-full h-48 object-cover">
+                            <img src="${news.image}" alt="Notícia" class="w-full h-40 sm:h-48 object-cover">
                             <div class="p-4">
-                                <h3 class="text-lg font-bold text-gray-900 truncate">${news.title}</h3>
+                                <h3 class="text-base sm:text-lg font-bold text-gray-900 truncate">${news.title}</h3>
                             </div>
                         </div>
                     `;
                 } else {
                     // Layout Completo (como estava antes)
                     return `
-                        <div class="bg-white p-6 rounded-lg shadow-md">
-                            <img src="${news.image}" alt="Notícia" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <div class="bg-white p-4 sm:p-6 rounded-lg shadow-md">
+                            <img src="${news.image}" alt="Notícia" class="w-full h-40 sm:h-48 md:h-56 object-cover rounded-lg mb-4">
                             <span class="text-xs text-gray-500">${news.date.split('-').reverse().join('/')}</span>
-                            <h3 class="text-xl font-bold mb-2 text-gray-900">${news.title}</h3>
-                            <p class="text-gray-700">${news.text}</p>
+                            <h3 class="text-lg md:text-xl font-bold mb-2 text-gray-900">${news.title}</h3>
+                            <p class="text-gray-700 text-sm md:text-base">${news.text}</p>
                         </div>
                     `;
                 }
@@ -364,7 +352,7 @@
             container.innerHTML = games.map(game => `
                 <div class="bg-white p-4 rounded-lg shadow-md">
                     <p class="text-sm font-semibold text-blue-600">${formatDateTime(game.date)}</p>
-                    <h3 class="text-lg font-bold mt-1 mb-2 text-gray-900">${game.teams}</h3>
+                    <h3 class="text-base sm:text-lg font-bold mt-1 mb-2 text-gray-900">${game.teams}</h3>
                     <p class="text-sm text-gray-600 mb-3">${game.location}</p>
                     <a href="${game.mapLink}" target="_blank" class="inline-block bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors">Ver Local</a>
                 </div>
@@ -384,14 +372,14 @@
             container.innerHTML = results.map(result => `
                 <div class="bg-white p-4 rounded-lg shadow-md">
                     <p class="text-sm font-semibold text-blue-600">${formatDateTime(result.date)}</p>
-                    <h3 class="text-xl font-bold mt-1 mb-2 text-gray-900">${result.match}</h3>
+                    <h3 class="text-lg sm:text-xl font-bold mt-1 mb-2 text-gray-900">${result.match}</h3>
                     <p class="text-sm text-gray-600 mb-3">${result.location}</p>
                     <a href="${result.mapLink}" target="_blank" class="inline-block bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors">Ver Local</a>
                 </div>
             `).join('');
         }
 
-        // Renderiza Acervo (em ambos os containers)
+        // Renderiza Acervo (APENAS NO OVERLAY)
         function renderArchive() {
             const archiveData = [
                 { name: 'Fotos e Vídeos', url: 'https://drive.google.com/drive/folders/1MPieySZltQ69euP81L9o2V08wlC_4JQu?usp=drive_link' },
@@ -399,45 +387,39 @@
             ];
 
             const linkHTML = archiveData.map(link => `
-                <a href="${link.url}" target="_blank" class="block bg-gray-700 hover:bg-gray-800 text-white font-bold py-3 px-4 rounded-lg text-center transition-colors">
+                <a href="${link.url}" target="_blank" class="block bg-gray-700 hover:bg-gray-800 text-white font-bold py-3 px-4 rounded-lg text-center transition-colors text-base sm:text-lg">
                     ${link.name}
                 </a>
             `).join('');
 
-            document.getElementById('archiveContainer').innerHTML = linkHTML;
             document.getElementById('archiveOverlayContainer').innerHTML = linkHTML;
         }
 
-        // Renderiza Utilidades (em ambos os containers, com layouts diferentes)
+        // Renderiza Utilidades (APENAS NO OVERLAY)
         async function renderUtilities() {
-            const mainContainer = document.getElementById('utilitiesContainer');
             const overlayContainer = document.getElementById('utilitiesOverlayContainer');
-            if (!mainContainer || !overlayContainer) return;
+            
+            if (!overlayContainer) {
+                console.error("Container do overlay 'utilitiesOverlayContainer' não encontrado.");
+                return;
+            }
 
             try {
                 const snapshot = await get(ref(database, 'utilities'));
                 if (!snapshot.exists()) {
                     const errorMsg = '<p class="text-sm text-gray-600">Nenhuma utilidade cadastrada.</p>';
-                    mainContainer.innerHTML = errorMsg;
                     overlayContainer.innerHTML = errorMsg;
                     return;
                 }
                 const utilities = Object.values(snapshot.val());
                 
-                // Popula o card da página principal (só links)
-                mainContainer.innerHTML = utilities.slice(0, 2).map(s => `
-                    <button onclick="showOverlay('utilitiesOverlay')" class="block w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-lg text-center transition-colors text-sm">
-                        ${s.name}
-                    </button>
-                `).join('');
-                
                 // Popula o overlay (cards com detalhes)
                 overlayContainer.innerHTML = utilities.map(s => `
                     <div class="bg-white p-6 rounded-lg shadow-md flex flex-col">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-4">${s.name}</h3>
-                        <p class="text-gray-700 mb-2"><strong>Descrição:</strong> ${s.description}</p>
-                        <p class="text-gray-700 mb-2"><strong>Endereço:</strong> ${s.address}</p>
-                        <p class="text-gray-700 mb-4"><strong>Telefone:</strong> ${s.phone}</p>
+                        <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">${s.name}</h3>
+                        <p class="text-gray-700 mb-2 text-sm sm:text-base"><strong>Descrição:</strong> ${s.description}</p>
+                        <p class="text-gray-700 mb-2 text-sm sm:text-base"><strong>Endereço:</strong> ${s.address}</p>
+                        <p class="text-gray-700 mb-4 text-sm sm:text-base"><strong>Telefone:</strong> ${s.phone}</p>
                         <a href="${s.link}" target="_blank" class="mt-auto inline-block bg-gray-700 hover:bg-gray-800 text-white font-bold py-3 px-4 rounded-lg text-center transition-colors">
                             Acessar Link
                         </a>
@@ -446,7 +428,6 @@
             } catch (error) {
                  console.error("Erro ao carregar utilidades:", error);
                  const errorMsg = '<p class="text-red-500 text-sm">Falha ao carregar.</p>';
-                 mainContainer.innerHTML = errorMsg;
                  overlayContainer.innerHTML = errorMsg;
             }
         }
